@@ -10,7 +10,7 @@ if (age < 18)
 else if (age >= 18 && age <= 22) {
     let query = confirm("Are you sure you want to continue?");
     if (query){
-        let username = prompt("Welcome, please enter your username ");
+        alert("Welcome, "+ name);
     }
     else{
         alert("You are not allowed to visit this website");
@@ -18,5 +18,5 @@ else if (age >= 18 && age <= 22) {
 }
 
 else if(age >= 22){
-    let username = prompt("Welcome, please enter your username ");
+    alert("Welcome, "+ name);
 }
