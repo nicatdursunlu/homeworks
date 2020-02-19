@@ -1,0 +1,2 @@
+	Object methods are objects which have functions within them. We use them to do our code more readeble and avoid of repetition. Object methods also have parametrs, in the brackets 
+we write he code. When we call this object methods as functions they execute do some operations with those parametrs and return the result of operations. 
