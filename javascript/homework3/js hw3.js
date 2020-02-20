@@ -14,9 +14,9 @@ function createNewUser() {
         }
     };
 
-    newUser.getLogin();
+    return newUser;
 }
 
-let user = {
-    result: createNewUser()
-};
+let user = createNewUser();
+
+user.getLogin()
