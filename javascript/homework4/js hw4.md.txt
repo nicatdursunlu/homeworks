@@ -1,0 +1,2 @@
+	forEach loop works without indexxes. It has benefits when you do not have to declare indexes. forEach loop calls a callback function once for each element in an array.
+The forEach will call the function for each element in the array
