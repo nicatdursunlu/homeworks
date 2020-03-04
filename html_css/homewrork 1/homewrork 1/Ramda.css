@@ -1,0 +1,159 @@
+
+body{
+    margin: 0;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+/*   ***Menu Part***   */
+
+.main-header{
+    padding-top: 50px;
+}
+
+.container{
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.logo{
+    font-size: 60px;
+    font-family: "Myriadc Pro";
+    text-decoration: none;
+    color: black;
+}
+
+.blue{
+    color: #4bcaff;
+}
+
+.navigation{
+    margin-top: 30px;
+    margin-left: auto;
+    background-color: #35444f;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-link{
+    border-left: 1px solid rgba(255,255,255,0);
+    border-right: 1px solid rgba(255,255,255,0);
+    padding: 10px 55px;
+    font-size: 24px;
+    color: white;
+    text-decoration: none;
+    transition: all .5s;
+}
+
+.nav-link:hover{
+    background-color: #222f3a;
+    border-color: white;
+}
+
+/*   ***Left menu part***   */
+
+.content{
+    margin-top: 54px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.nav-menu{
+    border: 1px solid black;
+    width: 1500px;
+}
+
+.nav-menu--list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-menu--list a{
+    color: rgb(120,130,137);
+    padding: 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 27px;
+    transition: all .5s;
+}
+
+.nav-menu--list a:hover{
+    background-color: #dbdbdb;
+    padding-left: 40px;
+}
+
+/*    ***Article Part***   */
+
+.article{
+    width: calc(100%-390px);
+}
+
+.artcile-image{
+    border: 1px solid black;
+    padding: 90px 50px;
+    max-height: 500px;
+    margin-left: 52px;
+}
+
+.artcile-image img{
+    display: block;
+    height: 300px;
+    object-fit: contain;
+    object-position: center;
+    margin: 0 auto;
+    transition: transform .4s
+}
+
+.artcile-image img:hover{
+    /*-webkit-transform: scale(1.5);
+    -ms-transform: scale(1.5);*/
+    transform: scale(1.3);
+}
+
+
+.paragraph{
+    margin-top: 30px;
+    margin-left: 52px;
+    padding-left: 29px;
+    padding-right: 35px;
+    font-size: 18px;
+}
+
+/* ***Footer part*** */
+
+.footer-nav{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: auto;
+    background-color: #b4b7ba;
+    display: flex;
+    justify-content: start;
+}
+
+.footer-links{
+    margin: 0 10px;
+    text-decoration: none;
+    color: #242424;
+    font-size: 20px;
+    padding: 20px 11px;
+}
+
+.footer-links:hover {
+    text-decoration: underline;
+    text-decoration-color: #307c94;
+    color: #307c94;
+    transition: all .2s;
+}
+
+.copyright{
+    display: flex;
+    justify-content: end;
+    font-size: 20px;
+    margin-top: 13px;
+    padding-left: 350px;
+    padding-right: 20px;
+}
