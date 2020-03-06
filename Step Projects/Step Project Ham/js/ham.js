@@ -32,29 +32,6 @@ projectItemCntainer.forEach((e) => {
 
 //JS for images
 
-// const imageTabs = document.querySelectorAll(".image-title");
-// const imageItemContainer = document.querySelectorAll(".image-item");
-
-// for(let i = 0; i < imageTabs.length; i++) {
-//     imageTabs[i].index = i;
-//     imageItemContainer[i].dataset.key = i;
-
-//     imageTabs[i].addEventListener('click', () => {
-//         for(let j = 0; j < imageTabs.length; j++) {
-//             imageTabs[j].classList.remove("active");
-//         }
-
-//         for(let j = 0; j < imageItemContainer.length; j++) {
-//             imageItemContainer[j].style.display = "none";
-//         }
-
-//         imageItemContainer[i].style.display = "block";
-//         ima[i].classList.add('active');
-//     });
-
-// }
-
-
 const imageTitleContainer = document.getElementById('image-titles');
 const images = document.querySelectorAll('.image-item');
 
@@ -82,13 +59,13 @@ function filterByClassName(elements, className) {
 
 // JS for Load More Button
 
-// $(".image-hidden").slice(0,0).show();
+ $(".image-hidden").slice(0,0).show();
 
-// $(".load-more-link").on('click', function(e) {
-//     e.preventDefault();
+ $(".load-more-link").on('click', function(e) {
+     e.preventDefault();
 
-//     $(".image-hidden:hidden").slice(0,12).slideDown();
-//     if($(".image-hidden:hidden").length == 0){
-//         $(".load-more-link").fadeOut();
-//     }
-// }) 
+     $(".image-hidden:hidden").slice(0,12).slideDown();
+     if($(".image-hidden:hidden").length == 0){
+         $(".load-more-link").fadeOut();
+     }
+ }) 
