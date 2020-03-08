@@ -82,13 +82,13 @@ function filterByClassName(elements, className) {
 
 // JS for Load More Button
 
-// $(".image-hidden").slice(0,0).show();
+$(".image-hidden").slice(0,0).show();
 
-// $(".load-more-link").on('click', function(e) {
-//     e.preventDefault();
+$(".load-more-link").on('click', function(e) {
+    e.preventDefault();
 
-//     $(".image-hidden:hidden").slice(0,12).slideDown();
-//     if($(".image-hidden:hidden").length == 0){
-//         $(".load-more-link").fadeOut();
-//     }
-// }) 
+    $(".image-hidden:hidden").slice(0,12).slideDown();
+    if($(".image-hidden:hidden").length == 0){
+        $(".load-more-link").fadeOut();
+    }
+}) 

@@ -10,7 +10,7 @@
 /*     ***Header Part***     */
 
 .header{
-    background-image: url('img/Sections background/section-1(header).jpg');
+    background-image: url('.../img/Sections background/section-1(header).jpg');
     background-size: cover;
     background-attachment: fixed;
 }
@@ -390,7 +390,7 @@
 
 
 .third-section{
-    background-image: url('img/Sections background/section-2.jpg');
+    background-image: url('.../img/Sections background/section-2.jpg');
     background-size: cover;
     background-attachment: fixed;
     height: 450px;
