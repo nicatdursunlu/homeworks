@@ -518,7 +518,7 @@
     width: 290px;
     background-color: rgba(255, 255, 255, 0.9);
     display: none;
-    padding-left: 100px;
+    text-align: center;
 }
 
 .image-item-icons{
@@ -559,7 +559,7 @@
 .image-item-hover-name{
     color: #8a8b8a;
     align-items: center;
-    padding-left: 100px;
+    
 }
 
 .image-item img {

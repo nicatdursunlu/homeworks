@@ -38,7 +38,7 @@ const images = document.querySelectorAll('.image-item');
 imageTitleContainer.addEventListener('click', (e) => {
     if(e.target.classList.contains('image-title')) {
         const title = e.target;
-        const type = title.dataset.filterby;
+        const type = title.dataset.filterby || 'image-item';
         const isActive = title.classList.contains('active');
 
         if(!isActive) {
@@ -51,11 +51,9 @@ imageTitleContainer.addEventListener('click', (e) => {
 
 function filterByClassName(elements, className) {
     for(let element of elements) {
-        element.hidden = !element.classList.contains(classNAme);
+        element.hidden = !element.classList.contains(className);
     }
 }
-
-
 
 // JS for Load More Button
 
