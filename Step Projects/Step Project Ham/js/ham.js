@@ -59,7 +59,6 @@ function filterByClassName(elements, className) {
 
 // JS for Load More Button
 
-<<<<<<< HEAD
 $(".image-hidden").slice(0,0).show();
 
 $(".load-more-link").on('click', function(e) {
@@ -70,15 +69,3 @@ $(".load-more-link").on('click', function(e) {
         $(".load-more-link").fadeOut();
     }
 }) 
-=======
- $(".image-hidden").slice(0,0).show();
-
- $(".load-more-link").on('click', function(e) {
-     e.preventDefault();
-
-     $(".image-hidden:hidden").slice(0,12).slideDown();
-     if($(".image-hidden:hidden").length == 0){
-         $(".load-more-link").fadeOut();
-     }
- }) 
->>>>>>> b93392bc5f22c08ee730944607d60c523c413a15
