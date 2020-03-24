@@ -1,19 +1,20 @@
 import React from 'react'
-import {IoMdClose} from 'react-icons/io'
+import { MdClose } from "react-icons/md";
 
- export const Module = ({header, closeIcon, actions, text, close}) => {
+ export const Module = ({header, closeIcon, actions, text, close}, props) => {
 
     return(
         <div className="modal">
             <header>
                 {header}
-                {closeIcon  &&  <button
-                                className="close-btn"
-                                onClick={close}>
-                                  {/* <IoMdClose/> */}
-                                  {/* it doesn't work */}
-                                  X
-                                </button>}
+                {closeIcon  &&  
+                    <button
+                        className="close-btn"
+                        onClick={close}
+                    >
+                        <MdClose/>
+                    </button>
+                }
             </header>
             <p className="modal-text">{text}</p>
             {actions}

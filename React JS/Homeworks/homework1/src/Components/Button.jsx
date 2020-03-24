@@ -6,9 +6,10 @@ const Button = ({text, backgroundColor, onClick}) => {
     return(
         <div className="buttons">
             <button
-            className="btn"
-            style={{backgroundColor}}
-            onClick={onClick}>
+                className="btn"
+                style={{backgroundColor}}
+                onClick={onClick}
+            >
                 {text}
             </button>
 
