@@ -1,7 +1,7 @@
 import React from 'react'
 import { MdClose } from "react-icons/md";
 
- export const Module = ({header, closeIcon, actions, text, close}, props) => {
+ export const Modal = ({header, closeIcon, actions, text, close}, props) => {
 
     return(
         <div className="modal">

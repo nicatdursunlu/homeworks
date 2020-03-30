@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Module} from './Components/Module';
+// import {Module} from './Components/Module';
 import Button from './Components/Button';
 
 import {Modal} from './Components/Modal';
@@ -38,54 +38,53 @@ function App(props) {
     
 
       {firstModalStatus && (
-                            <Module
-                              show={firstModalStatus}
-                              closing={firstModalClose}
-                              header='Do you want to delete this file?'
-                              closeIcon={true}
-                              text={`Once you delete this file, it won't be possible to undo this action.\n
-                                    Are you sure you want do delete it`}
-                              close={toggleFirstModal}
-                              actions={[
-                                <Button
-                                  key={1}
-                                  backgroundColor='rgba(0,0,0,0.2)'
-                                  text='Ok'
-                                  onClick={() => alert('File deleted')}
-                                />,
-
-                                <Button
-                                  key={2}
-                                  backgroundColor='rgba(0,0,0,0.2)'
-                                  text='Cancel'
-                                  onClick={toggleFirstModal} 
-                                />]}  
-                              />
-       )}
+        <Modal
+        show={firstModalStatus}
+        closing={firstModalClose}
+        header='Do you want to delete this file?'
+        closeIcon={true}
+        text={`Once you delete this file, it won't be possible to undo this action.\n
+              Are you sure you want do delete it`}
+        close={toggleFirstModal}
+        actions={[
+          <Button
+            key={1}
+            backgroundColor='rgba(0,0,0,0.2)'
+            text='Ok'
+            onClick={() => alert('File deleted')}
+          />,
+          <Button
+            key={2}
+            backgroundColor='rgba(0,0,0,0.2)'
+            text='Cancel'
+            onClick={toggleFirstModal} 
+          />]}  
+        />
+      )}
 
       {secondModalStatus && (
-                            <Module
-                              show={secondModalStatus}
-                              closing={secondModalClose}
-                              header='Do you want to save changes?'
-                              closeIcon={true}
-                              text={`Once you do not save this file, it won't be possible to open this file. \n
-                                    Are you sure you want save it`}
-                              close={toggleSecondModal}
-                              actions={[
-                                <Button
-                                key={1}
-                                backgroundColor='rgba(0,0,0,0.2)'
-                                text='Ok'
-                                onClick={() => alert('File saved successfully') } />,
-
-                                <Button
-                                key={2}
-                                backgroundColor='rgba(0,0,0,0.2)'
-                                text='Cancel'
-                                onClick={toggleSecondModal} 
-                                />]}
-                            />
+        <Modal
+          show={secondModalStatus}
+          closing={secondModalClose}
+          header='Do you want to save changes?'
+          closeIcon={true}
+          text={`Once you do not save this file, it won't be possible to open this file. \n
+          Are you sure you want save it`}
+          close={toggleSecondModal}
+          actions={[
+            <Button
+              key={1}
+              backgroundColor='rgba(0,0,0,0.2)'
+              text='Ok'
+              onClick={() => alert('File saved successfully') } 
+            />,
+            <Button
+            key={2}
+            backgroundColor='rgba(0,0,0,0.2)'
+            text='Cancel'
+            onClick={toggleSecondModal} 
+          />]}
+        />
       )}
 
 
