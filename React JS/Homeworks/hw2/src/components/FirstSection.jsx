@@ -210,7 +210,7 @@ export const FirstSection = () => {
                             key={1}
                             backgroundColor='rgba(0,0,0,0.2)'
                             text='Add to Cart'
-                            onClick={addToCart(name, price, Date.now())}
+                            //onClick={addToCart(name, price, Date.now())}
                         />,
 
                         <Button
@@ -256,7 +256,6 @@ export const FirstSection = () => {
             {addToCartModalStatus && 
                 (<div className="add-to-cart-modal">
                     
-                    <h1>hello</h1>
                     {cart.map(({ name, price, url, count }) => (
                         <div key={url}>
                             <h4>{name}</h4>
