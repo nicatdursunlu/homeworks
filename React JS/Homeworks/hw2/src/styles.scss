@@ -397,13 +397,17 @@
 }
 
 .add-to-cart-modal{
-    height: 320px; 
-    width: 450px;
-    margin: -890px 840px;
+    height: 380px; 
+    width: 420px;
+    margin: -3185px 840px;
+    //margin: 200px 300px;
+    //margin: -100px;
     border-radius: 5px; 
     position: absolute;
     background-color: white;
     text-align: center;
+
+    border: 2px solid black;
 }
 
 .add-to-cart-modal-header{

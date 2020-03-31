@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { AddToCartModal } from './AddToCartModal';
+//import { AddToCartModal } from './AddToCartModal';
 import { MdLocalGroceryStore} from "react-icons/md";
+//import {SingleProduct} from './SingleProduct';
+
+import { IoIosStar } from "react-icons/io";
+import { Modal } from './Modal';
+import { Button } from './Button';
 
 import logo from './img/logo1.png'; 
 import img1 from './img/img1.png';
@@ -17,10 +22,76 @@ import cal from './img/calendar.png';
 
 export const FirstSection = () => {
 
-    const [addToCartModalStatus, setAddToCartModalStatus] = useState(false);
+    const [data, setData] = useState({ products: [] });
+    console.log(data);
 
+    const getData = async (url) => {
+        const response = await fetch(url);
+        const newData = await response.json();
+        setData(data => ({
+            ...newData,
+            products: [...data.products, ...newData.products]
+        }));
+        
+        console.log(data);
+    };
+
+    useEffect(() => {
+        getData('./products.json')
+    }, []);
+
+
+    const addToCart = (name, price, url) => {
+        if(!isNaN(price)) {
+            const isAvailable = cart.find((item) => url === item.url);
+
+            if(isAvailable) {
+                setCart(cart => cart.map(item => {
+                    if(item.url === url) {
+                        return {
+                            ...item,
+                            count: item.count + 1
+                        }
+                    }
+                    return item;
+                }))
+            }
+            else {
+                setCart(cart => [...cart, {
+                    name,
+                    price,
+                    url,
+                    count: 1
+                }])
+            }
+        }
+    }
+
+    const removeFromCart = (url, count) => {
+        if (count > 1) {
+            setCart(cart => cart.map(item => {
+                if (item.url === url) {
+                    return {
+                        ...item,
+                        count: item.count - 1
+                    }
+                }
+                return item
+            }));
+        } 
+        else {
+            setCart(cart => cart.filter(item => item.url !== url))
+        }
+    }
+
+    const [firstModalStatus, setFirstModalStatus] = useState(false);
+
+    const toggleFirstModal = () => setFirstModalStatus (v => !v);
+    const firstModalClose = () => setFirstModalStatus(false);
+
+    const [addToCartModalStatus, setAddToCartModalStatus] = useState(false);
     const toggleAddToCart = () => setAddToCartModalStatus(v => !v);
-    const addToCartModalClose = () => setAddToCartModalStatus(false);
+    //const addToCartModalClose = () => setAddToCartModalStatus(false);
 
     const [cart, setCart] = useState([]);
 
@@ -73,9 +144,6 @@ export const FirstSection = () => {
                 </p>
             </div>
 
-
-                    
-
             <main className="main-section container">
                 <div className="title">
                     <h2 className="title-text">
@@ -118,8 +186,98 @@ export const FirstSection = () => {
                     </p>
                 </div>
             </div>
-                   
+
+            <h5 className="album-title">
+                Latest arrivals in musica
+            </h5>
+
+
+
+
+
+            { firstModalStatus ? <div onClick={firstModalClose} className="back-drop"></div> : null }
+
+            {firstModalStatus &&   
+                (<Modal
+                    show={firstModalStatus}
+                    closing={firstModalClose}
+                    header='Do you want to add this product to cart?'
+                    closeIcon={true}
+                    text={`Are you sure you want to add this product to cart?`}
+                    close={toggleFirstModal}
+                    actions={[
+                        <Button
+                            key={1}
+                            backgroundColor='rgba(0,0,0,0.2)'
+                            text='Add to Cart'
+                            onClick={addToCart(name, price, Date.now())}
+                        />,
+
+                        <Button
+                            key={2}
+                            backgroundColor='rgba(0,0,0,0.2)'
+                            text='Cancel'
+                            onClick={toggleFirstModal} 
+                        />]}  
+                />)
+            }
+
+
+            <div className="cart">
+                {data.products.map(( { id, name, image, desc, price }) => (
+                    <div className="product-info">
+                        <img src={image} alt={name} className="cart-img" />
+                        <div className="cart-info">
+                            <p className="prooduct-name">{name}</p>
+                            <div className="prooduct-stars">
+                                <IoIosStar/>
+                                <IoIosStar/>
+                                <IoIosStar/>
+                                <IoIosStar/>
+                                <IoIosStar className="star"/>
+                            </div>
+                            <p className="prooduct-description">{desc}</p>
+                            <div className="price-container">
+                                <p className="prooduct-price">${price}</p>
+                                <button 
+                                    className="add-to-cart-btn" 
+                                    onClick={toggleFirstModal}
+                                >add to cart
+                                </button>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                ))}        
+            </div>
+
+
             {addToCartModalStatus && 
+                (<div className="add-to-cart-modal">
+                    
+                    <h1>hello</h1>
+                    {cart.map(({ name, price, url, count }) => (
+                        <div key={url}>
+                            <h4>{name}</h4>
+                            <i>{price}</i>
+                            <br />
+                            <b>{count}</b>
+                            <br />
+                            <button
+                                onClick={() => removeFromCart(url, count)}
+                            >X</button>
+                        </div>
+                    ))}
+                    <h3>Total:
+                        {cart.reduce((total, { price, count }) => total + price * count, 0)}
+                    </h3>
+                </div>
+            )}
+
+
+               
+            {/* {addToCartModalStatus && 
                 (<AddToCartModal 
                     show={addToCartModalStatus}
                     closing={addToCartModalClose}
@@ -127,12 +285,10 @@ export const FirstSection = () => {
                     closeIcon={true}
                     text={`Are you sure you want to add this product to cart?`}
                     close={toggleAddToCart}
-
                     cart={cart}
                     setCart={setCart}
-
                 />)
-            }
+            } */}
 
 
         </section>

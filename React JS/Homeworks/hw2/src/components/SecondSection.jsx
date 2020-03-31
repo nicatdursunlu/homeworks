@@ -12,7 +12,7 @@ export const SecondSection = () => {
 
     return(
        <section className="second-section"> 
-            <main className="main-section container">
+            {/* <main className="main-section container">
                 <div className="title">
                     <h2 className="title-text">
                         Welcome to
@@ -57,9 +57,9 @@ export const SecondSection = () => {
 
                 <h5 className="album-title">
                     Latest arrivals in musica
-                </h5>
+                </h5> */}
 
-                <SingleProduct/>
+                {/* <SingleProduct/> */}
 
 
                 {/* <div className="carts">

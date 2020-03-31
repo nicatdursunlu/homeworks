@@ -1,7 +1,7 @@
 import React from 'react'
 import { MdClose } from "react-icons/md";
 
- export const Modal = ({header, closeIcon, actions, text, close}, props) => {
+ export const Modal = ({header, closeIcon, actions, text, close}, { id, name, image, desc, price }, data, addToCart, props) => {
 
     return(
         <div className="modal">
@@ -16,7 +16,10 @@ import { MdClose } from "react-icons/md";
                 }
             </header>
             <p className="modal-text">{text}</p>
-            {actions}
+
+
+
+            
         </div>
     )
 }
