@@ -1,6 +1,6 @@
-import React from 'react';
-import { Musica } from './Musica';
+import React, { useState } from 'react';
 
+import { AddToCartModal } from './AddToCartModal';
 import { MdLocalGroceryStore} from "react-icons/md";
 
 import logo from './img/logo1.png'; 
@@ -11,33 +11,37 @@ import twitter from './img/tw.png';
 import mail from './img/mail.png';
 import dribble from './img/dribble.png';
 import vimeo from './img/vimeo.png';
-
 import cd from './img/cd.png';
 import earpod from './img/icon.png';
 import cal from './img/calendar.png';
 
 export const FirstSection = () => {
+
+    const [addToCartModalStatus, setAddToCartModalStatus] = useState(false);
+
+    const toggleAddToCart = () => setAddToCartModalStatus(v => !v);
+    const addToCartModalClose = () => setAddToCartModalStatus(false);
+
+    const [cart, setCart] = useState([]);
+
     return(
         <section className="first-section">
             <header className="header"> 
                 <div className="icons-line">
-                    {/* <FaFacebookF className="facebook" />
-                    <FaBasketballBall className="basketball"/>
-                    <AiOutlineTwitter className="twitter"/>
-                    <GoMail className="mail"/>
-                    <FaVimeoV className="vimeo" /> */}
-                    <img src={fb} className="facebook" />
-                    <img src={dribble} className="basketball" />
-                    <img src={twitter} className="twitter"/>
-                    <img src={mail} className="mail"/>
-                    <img src={vimeo} className="vimeo" />
-
+                    <img src={fb} className="icon" />
+                    <img src={dribble} className="icon" />
+                    <img src={twitter} className="icon"/>
+                    <img src={mail} className="icon"/>
+                    <img src={vimeo} className="icon"/>
                 </div>   
                 <div className="login-resgister-links">
                     <a href="#" className="login">Login </a>
                     <span className="slash">/</span>
                     <a href="#" className="register"> Register</a> 
-                    <button className="cart-btn">
+                    <button 
+                        className="store-btn"
+                        onClick={toggleAddToCart}
+                    >
                         <MdLocalGroceryStore className="store-logo"/>
                         Cart
                     </button>
@@ -115,7 +119,20 @@ export const FirstSection = () => {
                 </div>
             </div>
                    
+            {addToCartModalStatus && 
+                (<AddToCartModal 
+                    show={addToCartModalStatus}
+                    closing={addToCartModalClose}
+                    header='Do you'
+                    closeIcon={true}
+                    text={`Are you sure you want to add this product to cart?`}
+                    close={toggleAddToCart}
 
+                    cart={cart}
+                    setCart={setCart}
+
+                />)
+            }
 
 
         </section>

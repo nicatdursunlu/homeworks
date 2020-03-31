@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { IoIosStar } from "react-icons/io";
 import { Modal } from './Modal';
 import { Button } from './Button';
+import { AddToCartModal } from './AddToCartModal';
 
 export const SingleProduct = () => {
 
@@ -23,15 +24,14 @@ export const SingleProduct = () => {
         getData('./products.json')
     }, []);
 
-    const [cart, setCart] = useState([]);
 
-    const addToCart = (name, price, id) => {
+    const addToCart = (name, price, url) => {
         if(!isNaN(price)) {
-            const isAvailable = cart.find((item) => id === item.id);
+            const isAvailable = cart.find((item) => url === item.url);
 
             if(isAvailable) {
                 setCart(cart => cart.map(item => {
-                    if(item.id === id) {
+                    if(item.url === url) {
                         return {
                             ...item,
                             count: item.count + 1
@@ -44,7 +44,7 @@ export const SingleProduct = () => {
                 setCart(cart => [...cart, {
                     name,
                     price,
-                    id,
+                    url,
                     count: 1
                 }])
             }
@@ -55,7 +55,12 @@ export const SingleProduct = () => {
 
     const toggleFirstModal = () => setFirstModalStatus (v => !v);
     const firstModalClose = () => setFirstModalStatus(false);
- 
+
+    const [addToCartModalStatus, setAddToCartModalStatus] = useState(false);
+    const toggleAddToCart = () => setAddToCartModalStatus(v => !v);
+    const addToCartModalClose = () => setAddToCartModalStatus(false);
+
+    const [cart, setCart] = useState([]);
 
     return(
         <div>
@@ -66,10 +71,9 @@ export const SingleProduct = () => {
                 (<Modal
                     show={firstModalStatus}
                     closing={firstModalClose}
-                    header='Do you want to delete this file?'
+                    header='Do you want to add this product to cart?'
                     closeIcon={true}
-                    text={`Once you delete this file, it won't be possible to undo this action.\n
-                        Are you sure you want do delete it`}
+                    text={`Are you sure you want to add this product to cart?`}
                     close={toggleFirstModal}
 
                     actions={[
@@ -77,7 +81,7 @@ export const SingleProduct = () => {
                           key={1}
                           backgroundColor='rgba(0,0,0,0.2)'
                           text='Ok'
-                          onClick={() => alert('File deleted')}
+                          onClick={addToCart}
                         />,
 
                         <Button
@@ -117,6 +121,24 @@ export const SingleProduct = () => {
                     </div>
                 ))}        
             </div>
+
+            {addToCartModalStatus && 
+                (<AddToCartModal 
+                    show={addToCartModalStatus}
+                    closing={addToCartModalClose}
+                    header='Do you'
+                    closeIcon={true}
+                    text={`Are you sure you want to add this product to cart?`}
+                    close={toggleAddToCart}
+
+                    cart={cart}
+                    setCart={setCart}
+
+                />)
+            }
+
+            
+
         </div>
     )
 }

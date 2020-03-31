@@ -5,14 +5,13 @@ import { MdClose } from "react-icons/md";
 
     return(
         <div className="modal">
-            <header>
+            <header className="modal-header">
                 {header}
                 {closeIcon  &&  
                     <button
                         className="close-btn"
                         onClick={close}
-                    >
-                        <MdClose/>
+                    ><MdClose/>   
                     </button>
                 }
             </header>
