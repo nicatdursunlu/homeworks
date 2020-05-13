@@ -1,39 +1,35 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { CustomText, CustomField, CustonButton, ProductsCard } from '../components';
-import { Heading } from '../commons';
+import { Header } from '../commons';
 import COLORS from '../styles/colors';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export const AddToListScreen = () => {
     return(
         <View style={styles.container}>
 
-            <Heading 
-                heading="Add to list" 
+            <Header 
+                title="Add to list" 
                 back={true}
                 save={true}
+                menu={false}
             />
 
             <View style={styles.form}>
                 <View style={styles.horizontal}>
                     <View style={styles.row}>
-                        <View style={styles.titleWrapper}>
-                            <CustomText weight="medium" style={styles.title}>
-                                position name
-                            </CustomText> 
-                        </View>
-                        <View>
-                            <CustomText weight="medium" style={styles.title}>
-                                count
-                            </CustomText> 
-                        </View>
+                        <CustomText weight="medium" style={styles.name}>
+                            position name
+                        </CustomText> 
+                        <CustomText weight="medium" style={styles.text}>
+                            count
+                        </CustomText> 
                     </View>
 
                     <View style={[styles.row, styles.marginTop]}>
                         <CustomField 
-                            style={styles.field} 
-                            placeholder="cubsdybvys"
+                            style={styles.productName} 
+                            placeholder="product name"
                         />
                         <View style={[styles.row, styles.count]}>
                             <TouchableOpacity>
@@ -41,11 +37,9 @@ export const AddToListScreen = () => {
                                     -
                                 </CustomText>
                             </TouchableOpacity>
-                            <View>
-                                <CustomText style={styles.countText} weight="bold">
-                                    2
-                                </CustomText>
-                            </View>
+                            <TextInput 
+                                style={styles.countInput}
+                            />
                             <TouchableOpacity>
                                 <CustomText style={styles.countText} weight="bold">
                                     +
@@ -55,24 +49,7 @@ export const AddToListScreen = () => {
                     </View>
 
                     <View style={[styles.row, styles.marginBottom]}>
-                        <CustonButton 
-                            title="kilo" 
-                            style={styles.button} 
-                        /> 
-                        <CustonButton 
-                            title="kilo" 
-                            style={styles.button} 
-                        /> 
-                        <CustonButton 
-                            title="kilo" 
-                            style={styles.button} 
-                        /> 
-                        <CustonButton 
-                            title="kilo" 
-                            style={styles.button} 
-                        /> 
-
-                        {/* <TouchableOpacity style={styles.options}>
+                        <TouchableOpacity style={styles.options}>
                             <CustomText style={styles.optionsLabel}>pkg</CustomText>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.options}>
@@ -83,7 +60,7 @@ export const AddToListScreen = () => {
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.options}>
                             <CustomText style={styles.optionsLabel}>bott</CustomText>
-                        </TouchableOpacity> */}
+                        </TouchableOpacity>
                     </View>
                     <CustonButton 
                         title="Add to list"
@@ -131,19 +108,26 @@ const styles = StyleSheet.create({
         height: 40,
         paddingHorizontal: 10,
     },
+    productName: {
+        width: "100%",
+        paddingHorizontal: "22%",
+    }, 
+    countInput: {
+        paddingHorizontal: "3%",
+        //paddingVertical: "15%",
+        textAlign: 'center',
+    },
     countText: {
         paddingHorizontal: 7,
         fontSize: 18,
     },
-    titleWrapper: {
-        alignItems: 'center',
-    },
-    title: {
+    name: {
         fontSize: 12,
+        marginLeft: 82,
     },
-    field: {
-        width: 270,
-    }, 
+    text: {
+        marginRight: 35,
+    },
     options: {
         backgroundColor: COLORS.grey,
         paddingVertical: 15,
@@ -160,7 +144,7 @@ const styles = StyleSheet.create({
         color: "red",
     },
     btn : {
-        //width: "48%",
+        width: "100%",
         backgroundColor: COLORS.main,
     },
     border: {

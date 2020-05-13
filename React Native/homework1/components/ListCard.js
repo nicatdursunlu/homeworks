@@ -2,17 +2,17 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { CustomText } from './CustomText';
-import { ShopListCTX } from '../context/list';
 import COLORS from '../styles/colors';
 
 export const ListCard = ({ item: { title } }) => {
 
-    //const { shopList } = useContext(ShopListCTX);
 
     return(
         <TouchableOpacity>
             <View style={styles.singleCard}>
-                <CustomText weight="bold" style={styles.title}>{title}</CustomText>
+                <CustomText weight="bold" style={styles.title}>
+                    {title}
+                </CustomText>
             </View>  
         </TouchableOpacity>
     );

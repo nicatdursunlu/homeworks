@@ -4,7 +4,9 @@ import { CustomText } from './CustomText';
 import COLORS from '../styles/colors';
 import { useNavigation } from '@react-navigation/native';
 
-export const ShopListCard = ({ list }) => {
+export const ShopListCard = ({ list, shopListID,
+    //navigation 
+}) => {
 
     const { title, products } = list;
     const productsCount = products.length;
@@ -14,7 +16,7 @@ export const ShopListCard = ({ list }) => {
     return(
         <TouchableOpacity 
             style={styles.container} 
-            onPress={() => navigation.navigate("User Settings")}
+            onPress={() => navigation.navigate("Add To List")}
         > 
             <View style={styles.row}>
                 <CustomText weight="bold" style={[styles.title, { marginTop: 16, }]}>
@@ -44,7 +46,6 @@ const styles = StyleSheet.create({
         paddingTop: 16,
     },
     title: {
-        fontSize: 22,
         fontSize: 18,
     },
     count: {

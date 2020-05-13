@@ -1,36 +1,71 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { 
+    View, 
+    StyleSheet, 
+    AsyncStorage, 
+    TouchableWithoutFeedback, 
+    Keyboard 
+} from 'react-native';
 
 import { CustomText, CustomField, CustonButton, MenuHeaderIcon } from '../components';
-import { Heading } from '../commons';
+import { Header } from '../commons';
 import COLORS from '../styles/colors';
 
 export const UserSettingsScreen = () => {
+
+    const [fields, setFields] = useState({
+        username: "",
+        imgUrl: "",
+    });
+
+    const saveChangesBtnHandler =  () => {
+        console.log("username: ", fields.username);
+        console.log("img: ", fields.imgUrl);
+    };
+
+    const fieldChangneHandler = (name, value) => {
+        setFields((fields) => ({
+            ...fields,
+            [name]: value,
+        }));
+    };
+
+    
     return(
-        <View style={styles.container}>
-            <View style={styles.horizontal}>
-
-                <Heading heading="User Settings" />
-
-                <View style={styles.form}>
-                    <CustomText weight="medium" style={styles.usernameText}>
-                        username
-                    </CustomText>
-                    <CustomField 
-                        style={styles.field} 
-                        placeholder="username"
-                    />
-                    <CustomText weight="medium" style={styles.usernameText}>
-                        avatar url
-                    </CustomText>
-                    <CustomField 
-                        style={styles.field} 
-                        placeholder="avatar url"
-                    />
-                    <CustonButton title="Save Changes" />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.container}>
+                <View style={styles.horizontal}>
+                    <Header title="User Settings" menu={false} />
+                    <View style={styles.form}>
+                        <CustomText weight="medium" style={styles.usernameText}>
+                            username
+                        </CustomText>
+                        <CustomField 
+                            style={styles.field} 
+                            placeholder="username"
+                            placeholderTextColor="black"
+                            value={fields.username}
+                            onChangeText={(val) => fieldChangneHandler("username", val)}
+                        />
+                        <CustomText weight="medium" style={styles.usernameText}>
+                            avatar url
+                        </CustomText>
+                        <CustomField 
+                            style={styles.field} 
+                            placeholder="avatar url"
+                            placeholderTextColor="black"
+                            value={fields.imgUrl}
+                            onChangeText={(val) => fieldChangneHandler("imgUrl", val)}
+                        />
+                        <CustonButton 
+                            title="Save Changes" 
+                            style={styles.btn}
+                            onPress={saveChangesBtnHandler}
+                        />
+                    </View>
                 </View>
             </View>
-        </View>
+        </TouchableWithoutFeedback>
     );
 };
 
@@ -68,5 +103,8 @@ const styles = StyleSheet.create({
     }, 
     horizontal: {
         //marginHorizontal: 16,
+    },
+    btn: {
+        backgroundColor: COLORS.main,
     }
 });

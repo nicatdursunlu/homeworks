@@ -3,7 +3,7 @@ import { View, StyleSheet, TextInput } from 'react-native';
 
 import COLORS from '../styles/colors';
 
-export const CustomField = ({ placeholder, onChangeText, value, style}) => {
+export const CustomField = ({ placeholder, onChangeText, value, placeholderTextColor, style}) => {
     return(
         <View style={styles.container}>
             <TextInput
@@ -11,6 +11,7 @@ export const CustomField = ({ placeholder, onChangeText, value, style}) => {
                 style={[styles.field, style]}
                 value={value}
                 onChangeText={onChangeText}
+                placeholderTextColor={placeholderTextColor}
             />
         </View>
     );
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         textAlign: "center", 
         marginBottom: 15,
-        paddingHorizontal: "32%",
-        width: "100%",
+        //paddingHorizontal: "32%",
+        //width: "100%",
     }
 });

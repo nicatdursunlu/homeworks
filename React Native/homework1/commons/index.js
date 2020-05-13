@@ -1,3 +1,3 @@
 export { CustomDrawer } from './CustomDrawer';
-export { Heading } from './Heading';
+export { Header } from './Header';
 export { ListLayout } from './ListLayout';

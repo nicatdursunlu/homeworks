@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { RegularListScreen, CreateListScreen, AddToListScreen } from '../screens';
 import { ShopListCard } from '../components';
+import { Header } from '../commons';
 
 
 const { Navigator, Screen } = createStackNavigator();
@@ -13,24 +14,14 @@ export const RegularStack = () => {
             <Screen 
                 name="One Time List" 
                 component={RegularListScreen} 
-                options={{
-                    title: "nvsjnvnv",
-                    headerLeft: () => <MenuHeaderIcon/>
-                }}
-            />
-            <Screen 
-                name="Create List"
-                component={CreateListScreen}
+                // options={{
+                //     title: "One Time List",
+                //     headerLeft: () => <Header title="Regular Lists" />
+                // }}
             />
 
-            <Screen 
-                name="ShopListCard"
-                component={ShopListCard}
-            />
-            <Screen 
-                name="Add"
-                component={AddToListScreen}
-            />
+            <Screen name="Create List" component={CreateListScreen}/>
+            <Screen name="Add To List" component={AddToListScreen}/>
             
         </Navigator>
     );

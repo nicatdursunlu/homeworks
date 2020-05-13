@@ -22,7 +22,7 @@ export const RootDrawer = () => {
                 <Screen name="Add New List" component={CreateStack} />
                 <Screen name="One Time List" component={OneTimeStack} />
                 <Screen name="Regular List" component={RegularListScreen} />    
-                <Screen name="User Settings" component={EditScreen} />
+                <Screen name="Add To List" component={AddToListScreen} />
             </Navigator>
         </NavigationContainer>
     );

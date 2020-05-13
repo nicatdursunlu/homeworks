@@ -1,5 +1,6 @@
 // ACTION TYPES
 const ADD_LIST = "ADD_LIST";
+const ADD_PRODUCT = "ADD_PRODUCT";
 
 
 // SELECTORS
@@ -19,26 +20,25 @@ const initialState = {
                     id: createID(), 
                     name: "Pasta", 
                     count: 2, 
-                    //measure: pkg  
-
+                    unit: "pkg",
                 },
                 { 
                     id: createID(), 
                     name: "Salt", 
                     count: 1, 
-                    //measure: pkg 
+                    unit: "pkg", 
                 },
                 { 
                     id: createID(), 
                     name: "Tomatoes", 
                     count: 1, 
-                    //measure: kg 
+                    unit: "pkg", 
                 },
                 { 
                     id: createID(), 
                     name: "Cheese", 
                     count: 0.3, 
-                    //measure: kg 
+                    unit: "pkg",
                 },
             ]
         },
@@ -51,25 +51,25 @@ const initialState = {
                     id: createID(), 
                     name: "Pasta", 
                     count: 2, 
-                    //measure: pkg 
+                    unit: "pkg", 
                 },
                 { 
                     id: createID(), 
                     name: "Salt", 
                     count: 1, 
-                    //measure: pkg 
+                    unit: "pkg", 
                 },
                 { 
                     id: createID(), 
                     name: "Tomatoes", 
                     count: 1, 
-                    //measure: kg 
+                    unit: "pkg",
                 },
                 { 
                     id: createID(), 
                     name: "Cheese", 
                     count: 0.3, 
-                    //measure: kg 
+                    unit: "pkg",
                 },
             ]
         },
@@ -82,25 +82,25 @@ const initialState = {
                     id: createID(), 
                     name: "Pasta", 
                     count: 2, 
-                    //measure: pkg 
+                    unit: "pkg", 
                 },
                 { 
                     id: createID(), 
                     name: "Salt", 
                     count: 1, 
-                    //measure: pkg 
+                    unit: "pkg",
                 },
                 { 
                     id: createID(), 
                     name: "Tomatoes", 
                     count: 1, 
-                    //measure: kg 
+                    unit: "pkg",
                 },
                 { 
                     id: createID(), 
                     name: "Cheese", 
                     count: 0.3, 
-                    //measure: kg 
+                    unit: "pkg", 
                 },
             ]
         }
@@ -111,17 +111,35 @@ export function dataReducer(state = initialState, { type, payload }) {
     switch (type) {
         case ADD_LIST:
             return {   
-
                 ...state,
                 shopLists: [
                     ...state.shopLists,
                     {
                         id: createID(),
-                        name: payload,
-                        type: "regular",
+                        title: payload.title,
+                        type: payload.type,
                         products: [],
                     },
                 ],
+            };
+        case ADD_PRODUCT:
+            return {
+                ...state,
+                shopLists: state.shopLists.map((shopList) => {
+                    if(shopList.id === payload.shopListID) {
+                        return {
+                            ...shopList,
+                            products: [
+                                ...shopList.products,
+                                {
+                                    id: createID(),
+                                    name: payload.name,
+                                    count: payload.count,
+                                },
+                            ],
+                        };
+                    }
+                })
             };
     
         default:

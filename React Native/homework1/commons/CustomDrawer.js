@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 import { CustomText } from '../components/CustomText';
 import COLORS from '../styles/colors';
 import images from '../styles/images';
+
 
 export const CustomDrawer = ({ navigation }) => {
 
@@ -45,7 +46,7 @@ export const CustomDrawer = ({ navigation }) => {
                 <TouchableOpacity style={styles.drawerBtn} >
                     <CustomText 
                         weight="bold" style={styles.drawerBtnLabel}
-                        onPress={() => navigation.navigate("User Settings", {})}
+                        onPress={() => navigation.navigate("User Settings")}
                     >
                         User Settings
                     </CustomText>

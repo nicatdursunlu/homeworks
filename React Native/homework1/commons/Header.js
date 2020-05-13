@@ -6,34 +6,30 @@ import COLORS from '../styles/colors';
 import images from '../styles/images';
 
 import { useNavigation } from '@react-navigation/native';
-import { Ionicons } from "@expo/vector-icons";
 
-
-
-
-export const Heading = ({ heading, menu=true, back = false, save, edit }) => {
+export const Header = ({ title, menu=true, back, save, edit }) => {
 
     const navigation = useNavigation();
 
     return(
         <View style={styles.container}>
             <View style={[
-                styles.nav,
-                { justifyContent: back ? "space-between" : "flex-end" }
+                styles.header,
+                //{ justifyContent: back ? "space-between" : "flex-end" }
             ]}>
 
                 {back && (
                     <TouchableOpacity
                         style={styles.iconsWrapper}
-                        onPress={navigation.goBack()}
+                        //onPress={navigation.goBack()}
                     >
-                        <Image style={styles.arrowBack} source={images.arrowBack} />
+                        <Image style={styles.arrowBackIcon} source={images.arrowBack} />
                     </TouchableOpacity>
                 )}
                 
 
                 <CustomText weight="medium" style={styles.title}>
-                    {heading}
+                    {title}
                 </CustomText>
 
                 {menu && (
@@ -41,7 +37,7 @@ export const Heading = ({ heading, menu=true, back = false, save, edit }) => {
                         style={styles.iconsWrapper}
                         onPress={navigation.toggleDrawer}
                     >
-                        <Image style={styles.arrowBack} source={images.menu} />
+                        <Image style={styles.menuIcon} source={images.menu} />
                     </TouchableOpacity>
                 )}
                 
@@ -50,7 +46,7 @@ export const Heading = ({ heading, menu=true, back = false, save, edit }) => {
                         style={styles.iconsWrapper}
                         onPress={navigation.toggleDrawer}
                     >
-                        <Image style={styles.icon} source={images.save} />
+                        <Image style={styles.saveIcon} source={images.save} />
                     </TouchableOpacity>
                 )}
                 
@@ -63,28 +59,31 @@ const styles = StyleSheet.create({
     container: {
         paddingTop: 22,
         backgroundColor: COLORS.main,
-        alignItems: 'center',
     },
-    nav: {
+    header: {
         flexDirection: "row",
-        justifyContent: "space-between",
+        //alignItems: 'center',
+        //justifyContent: 'center',
     },
     title: {
         fontSize: 18,
         color: "white",
-        textAlign: "center",
         paddingTop: 10,
         paddingBottom: 50,
+        textAlign: 'center',
+        paddingLeft: 140,
+        paddingRight: 90,
     },
     iconsWrapper: {
-        paddingVertical: 18,
+        paddingVertical: 12,
     },
-    arrowBack: {
+    arrowBackIcon: {
         height: 18,
         width: 23,
     },
-    icon: {
-        height: 22,
-        width: 22,
-    }
+    menuIcon: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 10,
+    },
 });

@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 
-import { Heading, ListLayout } from '../commons';
+import { Header } from '../commons';
 import { ShopListCard } from '../components';
 import { getShopList } from '../redux/data';
 import { connect } from 'react-redux';
-import COLORS from '../styles/colors';
+
 
 const mapStateToProps = (state) => ({
     shopLists: getShopList(state),
@@ -13,16 +13,54 @@ const mapStateToProps = (state) => ({
 
 export const RegularListScreen = connect(mapStateToProps)((props) => {
 
-
+    const { navigation, shopLists } = props;
+    console.log("ListLayout: ",shopLists);
 
     return(
-        <ListLayout>
+        <View style={styles.container}>
+            <Header title="Regular Lists" />
+            <View style={styles.listWrapper}>
+               <View style={styles.list}>
+                    {shopLists
+                        .filter((list) => list.type === "regular")
+                        .map((list) => (
+                            <ShopListCard  
+                                list={list}
+                                navigation={navigation}
+                                shopListID={list.id}
 
-        </ListLayout>
+                            />
+                    ))}
+                </View> 
+            </View>
+        </View>
     );
 });
 
-const styles = StyleSheet.create({
-    
+const styles= StyleSheet.create({
+    container: {
+        backgroundColor: "white",
+        flex: 1,
+    },
+    // heading: {
+    //     paddingTop: 22,
+    //     backgroundColor: COLORS.main,
+    // },
+    // title: {
+    //     fontSize: 18,
+    //     color: "white",
+    //     textAlign: "center",
+    //     paddingVertical: 17,
+    // },
 
+    listWrapper: {
+        borderTopStartRadius: 20,
+        borderTopEndRadius: 20,
+        backgroundColor: "white",
+        alignItems: "center",
+        marginTop: -24,
+    },
+    list: {
+        margin: 16,
+    }
 });

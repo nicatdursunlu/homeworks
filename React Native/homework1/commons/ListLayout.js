@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import { Heading } from './Heading';
+import { Header } from './Header';
 import { ShopListCard } from '../components';
 import { getShopList } from '../redux/data';
 import { connect } from 'react-redux';
@@ -18,7 +18,7 @@ export const ListLayout = connect(mapStateToProps)((props) => {
 
     return(
         <View style={styles.container}>
-            <Heading heading="Regular Lists" />
+            <Header title="Regular Lists" />
             <View style={styles.listWrapper}>
                <View style={styles.list}>
                     {shopLists.map((list) => (

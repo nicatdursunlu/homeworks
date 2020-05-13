@@ -3,17 +3,19 @@ import {
     View, 
     StyleSheet, 
     TouchableOpacity, 
+    TouchableWithoutFeedback,
+    Keyboard,
 } from 'react-native';
 
 import COLORS from '../styles/colors';
 import { CustomText, CustomField, CustonButton } from '../components';
-import { Heading } from '../commons';
+import { Header } from '../commons';
 import { getShopList, addList } from '../redux/data';
 import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => ({
     shopLists: getShopList(state),
-});;
+});
 
 export const CreateListScreen = connect(mapStateToProps, {
     addList,
@@ -21,6 +23,7 @@ export const CreateListScreen = connect(mapStateToProps, {
 
 
     const [type, setType] = useState("regular");
+
     const [fields, setFields] = useState({
         shopListID: null,
         title: "",
@@ -34,10 +37,21 @@ export const CreateListScreen = connect(mapStateToProps, {
         }));
     };
 
-    const createListBtnHandler = () => {
+    const createListBtnHandler = (type) => {
+
+        const args = {
+            title: fields.title,
+            type,
+        };
+
         if(fields.title.trim() !== "") {
-            addList(fields.title);
-            navigation.navigate("Regular List");
+            addList(args);
+            if(args.type === "regular") {
+                navigation.navigate("Regular List"); 
+            }
+            else {
+                navigation.navigate("One Time List");
+            }
         }
     };
 
@@ -45,66 +59,62 @@ export const CreateListScreen = connect(mapStateToProps, {
     const isRegular = type === "regular";
 
     return(
-        <View style={styles.container}>
-                <Heading heading="New List" />
-
-                <View style={styles.form}>
-                    <CustomText style={styles.listName}>List Name</CustomText>
-                    <CustomField 
-                        placeholder="Something for me" 
-                        onChangeText={(val) => fieldChangneHandler("title", val)}
-                        style={[styles.field]} 
-                    />
-
-                    <View style={styles.optionsWrapper}>
-                        <TouchableOpacity 
-                            style={styles.options} 
-                            onPress={() => setType("One Time")}
-                        >
-                            <CustomText 
-                                style={[
-                                    styles.optionsLabel, 
-                                    { fontWeight: type === "oneTime" ? "bold" : "400"}
-                                ]}
-                            >
-                                One Time
-                            </CustomText>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity 
-                            style={styles.options}
-                            onPress={() => fieldChangneHandler("shopListID", id)}
-                        >
-                            <CustomText 
-                                style={[
-                                    styles.optionsLabel, 
-                                    { fontWeight: type === "Regular" ? "bold" : "400"}
-                                ]}
-                            >
-                                Regular
-                            </CustomText>
-                        </TouchableOpacity>  
-
-                        {/* <CustonButton 
-                            title="One Time" 
-                            style={styles.options} 
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.container}>
+                    <Header title="New List" menu={false} />
+                    <View style={styles.form}>
+                        <CustomText style={styles.listName}>List Name</CustomText>
+                        <CustomField 
+                            placeholder="Something for me"
+                            placeholderTextColor="black" 
+                            onChangeText={(val) => fieldChangneHandler("title", val)}
+                            style={[styles.field]} 
                         />
+
+                        <View style={styles.optionsWrapper}>
+                            <TouchableOpacity 
+                                onPress={() => setType("oneTime")}
+                                style={[styles.options,
+                                    { opacity: type === "oneTime" ? 1 : 0.5 }
+                                ]} 
+                               
+                            >
+                                <CustomText 
+                                    style={
+                                        { fontWeight: type === "oneTime" ? "bold" : "400" }
+                                    }
+                                >
+                                    One Time
+                                </CustomText>
+                            </TouchableOpacity>
+                            <TouchableOpacity 
+                                onPress={() => setType("regular")}
+                                style={[
+                                    styles.options,
+                                    { opacity: type === "regular" ? 1 : 0.5 }
+                                ]}
+                                
+                            >
+                                <CustomText 
+                                    style={
+                                        { fontWeight: type === "regular" ? "bold" : "400" }
+                                    }
+                                >
+                                    Regular
+                                </CustomText>
+                            </TouchableOpacity>  
+                        </View>
+
                         <CustonButton 
-                            title="Regular"  
-                            style={styles.optionsLabel} 
-                        /> */}
-                        
+                            title="Create List" 
+                            style={styles.crateBtn}
+                            onPress={() => createListBtnHandler(type)}
+                        />
+
                     </View>
 
-                    <CustonButton 
-                        title="Create List" 
-                        style={styles.crateBtn}
-                        onPress={createListBtnHandler}
-                    />
-
-                </View>
-
-        </View>
+            </View>
+        </TouchableWithoutFeedback>
     );
 });
 
@@ -112,10 +122,6 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: "white",
         flex: 1,
-    },
-    heading: {
-        //paddingTop: 22,
-        //backgroundColor: COLORS.main,
     },
     title: {
         fontSize: 18,
@@ -138,7 +144,8 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
     },
     field: {
-        //width: 350,
+        width: 362,
+        fontSize: 18,
     }, 
     optionsWrapper: {
         flexDirection: "row",
@@ -156,27 +163,9 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         alignItems: 'center',
     },
-    optionsLabel: {
-        textAlign: "center",
-        color: "grey",
-        backgroundColor: COLORS.grey,
-    },
-
-
     crateBtn: {
         backgroundColor: COLORS.main,
-        // borderRadius: 45,
-        // width: 380,
     },
-    // crateBtnTitle: {
-    //     color: "white",
-    //     fontSize: 14,
-    //     textTransform: "uppercase",
-    //     paddingVertical: 14,
-    //     textAlign: "center",
-    //     textTransform: "uppercase",
-    // }
-
 });
 
 

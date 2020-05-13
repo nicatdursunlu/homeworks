@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, ScrollView, FlatList } from 'react-native';
 import { CustomText } from './CustomText';
 import { getShopList } from '../redux/data';
 import { connect } from 'react-redux';
@@ -17,18 +17,32 @@ export const ProductsCard = connect(mapStateToProps)((props) => {
     console.log("Products: ", products);
 
     return(
-        <ScrollView style={styles.container}>
-            <CustomText style={styles.text}>Hello</CustomText>
-            {shopLists.map((item) => (
-                <View key={item.id} style={styles.list}>
-                    {item.products.map((it) => (
-                        <View key={it.id} style={styles.list}>
-                            <CustomText>{it.name}</CustomText>
-                        </View> 
-                    ))}
-                </View>
-            ))}
-        </ScrollView>
+        
+            <View style={styles.container}>
+                <CustomText style={styles.text}>Hello</CustomText>
+                {shopLists.map((list) => (
+                    <View key={list.id} style={styles.lis}>
+
+                        <FlatList 
+                            data={list.products}
+                            keyExtractor={(item) => item.id}
+                            renderItem={({item}) => (
+                                <View key={item.id} style={styles.list}>
+                                    <CustomText>{item.name}</CustomText>
+                                </View>
+                            )}
+                        />
+
+
+                        {/* {list.products.map((product) => (
+                            <View key={product.id} style={styles.list}>
+                                <CustomText>{product.name}</CustomText>
+                            </View> 
+                        ))} */}
+                    </View>
+                ))}
+            </View>
+        
     );
 });
 

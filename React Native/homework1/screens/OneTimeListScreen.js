@@ -1,38 +1,61 @@
 import React from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+
+import { Header } from '../commons';
+import { ShopListCard } from '../components';
+import { getShopList } from '../redux/data';
+import { connect } from 'react-redux';
 
 
-import COLORS from '../styles/colors';
-import { ListLayout } from '../commons';
+const mapStateToProps = (state) => ({
+    shopLists: getShopList(state),
+});
 
+export const OneTimeListScreen = connect(mapStateToProps)((props) => {
 
-export const OneTimeListScreen = () => {
+    const { navigation, shopLists } = props;
+    console.log("ListLayout: ",shopLists);
 
     return(
-        <ListLayout />
+        <View style={styles.container}>
+            <Header title="One Time Lists" />
+            <View style={styles.listWrapper}>
+               <View style={styles.list}>
+                    {shopLists
+                        .filter((list) => list.type === "oneTime")
+                        .map((list) => (
+                        <ShopListCard key={list.id} list={list} />
+                    ))}
+                </View> 
+            </View>
+        </View>
     );
-};
+});
 
-const styles = StyleSheet.create({
+const styles= StyleSheet.create({
     container: {
         backgroundColor: "white",
         flex: 1,
     },
-    heading: {
-        paddingTop: 22,
-        backgroundColor: COLORS.main,
-    },
-    title: {
-        fontSize: 18,
-        color: "white",
-        textAlign: "center",
-        paddingVertical: 17,
-    },
-    card: {
-        marginTop: 40,
-        alignItems: 'center',
-        // borderTopStartRadius: 20,
-        // borderTopEndRadius: 20,
-    },
+    // heading: {
+    //     paddingTop: 22,
+    //     backgroundColor: COLORS.main,
+    // },
+    // title: {
+    //     fontSize: 18,
+    //     color: "white",
+    //     textAlign: "center",
+    //     paddingVertical: 17,
+    // },
 
+    listWrapper: {
+        borderTopStartRadius: 20,
+        borderTopEndRadius: 20,
+        backgroundColor: "white",
+        alignItems: "center",
+        marginTop: -24,
+    },
+    list: {
+        margin: 16,
+    }
 });

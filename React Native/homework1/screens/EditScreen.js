@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { CustomText, CustonButton } from '../components';
-import { Heading } from '../commons';
+import { Header } from '../commons';
 import COLORS from '../styles/colors';
 
 export const EditScreen = () => {
     return(
         <View style={styles.container}>
-            <Heading heading="Edit Screen" />
+            <Header title="Edit Screen" />
             <View style={styles.body}>
                 <TouchableOpacity style={styles.resetBtn}>
                    <CustomText weight="bold" style={styles.resetBtnTitle}>Reset</CustomText>
