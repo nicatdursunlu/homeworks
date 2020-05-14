@@ -16,7 +16,7 @@ export const ShopListCard = ({ list, shopListID,
     return(
         <TouchableOpacity 
             style={styles.container} 
-            onPress={() => navigation.navigate("Add To List")}
+            onPress={() => navigation.navigate("SingleStaticEditScreen", { shopListID })}
         > 
             <View style={styles.row}>
                 <CustomText weight="bold" style={[styles.title, { marginTop: 16, }]}>

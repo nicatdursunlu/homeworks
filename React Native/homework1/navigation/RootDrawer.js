@@ -1,7 +1,16 @@
 import React from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { CreateListScreen, UserSettingsScreen, OneTimeListScreen, RegularListScreen, AddToListScreen, EditScreen } from '../screens';
+import { 
+    CreateListScreen, 
+    UserSettingsScreen, 
+    OneTimeListScreen, 
+    RegularListScreen, 
+    AddToListScreen, 
+    EditScreen, 
+    SingleStaticEditScreen 
+} from '../screens';
+
 import { CustomDrawer } from '../commons/CustomDrawer';
 import { CreateStack } from './CreateStack';
 import { OneTimeStack } from './OneTimeStack';
@@ -22,7 +31,7 @@ export const RootDrawer = () => {
                 <Screen name="Add New List" component={CreateStack} />
                 <Screen name="One Time List" component={OneTimeStack} />
                 <Screen name="Regular List" component={RegularListScreen} />    
-                <Screen name="Add To List" component={AddToListScreen} />
+                <Screen name="SingleStaticEditScreen" component={SingleStaticEditScreen} />
             </Navigator>
         </NavigationContainer>
     );

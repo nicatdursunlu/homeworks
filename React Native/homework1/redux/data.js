@@ -32,13 +32,13 @@ const initialState = {
                     id: createID(), 
                     name: "Tomatoes", 
                     count: 1, 
-                    unit: "pkg", 
+                    unit: "kg", 
                 },
                 { 
                     id: createID(), 
                     name: "Cheese", 
                     count: 0.3, 
-                    unit: "pkg",
+                    unit: "kg",
                 },
             ]
         },
@@ -63,13 +63,13 @@ const initialState = {
                     id: createID(), 
                     name: "Tomatoes", 
                     count: 1, 
-                    unit: "pkg",
+                    unit: "kg",
                 },
                 { 
                     id: createID(), 
                     name: "Cheese", 
                     count: 0.3, 
-                    unit: "pkg",
+                    unit: "kg",
                 },
             ]
         },
@@ -94,13 +94,13 @@ const initialState = {
                     id: createID(), 
                     name: "Tomatoes", 
                     count: 1, 
-                    unit: "pkg",
+                    unit: "kg",
                 },
                 { 
                     id: createID(), 
                     name: "Cheese", 
                     count: 0.3, 
-                    unit: "pkg", 
+                    unit: "kg", 
                 },
             ]
         }

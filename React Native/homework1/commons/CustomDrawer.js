@@ -46,7 +46,7 @@ export const CustomDrawer = ({ navigation }) => {
                 <TouchableOpacity style={styles.drawerBtn} >
                     <CustomText 
                         weight="bold" style={styles.drawerBtnLabel}
-                        onPress={() => navigation.navigate("User Settings")}
+                        onPress={() => navigation.navigate("SingleStaticEditScreen")}
                     >
                         User Settings
                     </CustomText>

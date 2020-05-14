@@ -49,6 +49,15 @@ export const Header = ({ title, menu=true, back, save, edit }) => {
                         <Image style={styles.saveIcon} source={images.save} />
                     </TouchableOpacity>
                 )}
+
+                {edit && (
+                    <TouchableOpacity
+                        style={styles.iconsWrapper}
+                        onPress={navigation.toggleDrawer}
+                    >
+                        <Image style={styles.editIcon} source={images.edit} />
+                    </TouchableOpacity>
+                )}
                 
             </View>
         </View>

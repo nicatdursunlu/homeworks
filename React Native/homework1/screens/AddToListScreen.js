@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
         borderTopStartRadius: 20, 
         borderTopEndRadius: 20,
         marginTop: -24,
+        marginBottom: -60,
     },
     horizontal: {
         marginHorizontal: 16,
@@ -114,7 +115,6 @@ const styles = StyleSheet.create({
     }, 
     countInput: {
         paddingHorizontal: "3%",
-        //paddingVertical: "15%",
         textAlign: 'center',
     },
     countText: {
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.main,
     },
     border: {
-        paddingBottom: 30,
+        paddingBottom: 21,
         borderBottomWidth: 10,
         borderBottomColor: "#E5E5E5",
         borderBottomWidth: 2,

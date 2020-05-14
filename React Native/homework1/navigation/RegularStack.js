@@ -1,7 +1,13 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { RegularListScreen, CreateListScreen, AddToListScreen } from '../screens';
+import { 
+    RegularListScreen, 
+    CreateListScreen, 
+    AddToListScreen, 
+    SingleStaticEditScreen 
+} from '../screens';
+
 import { ShopListCard } from '../components';
 import { Header } from '../commons';
 
@@ -22,6 +28,7 @@ export const RegularStack = () => {
 
             <Screen name="Create List" component={CreateListScreen}/>
             <Screen name="Add To List" component={AddToListScreen}/>
+            <Screen name="SingleStaticEditScreen" component={SingleStaticEditScreen} />
             
         </Navigator>
     );
