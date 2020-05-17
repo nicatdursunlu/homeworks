@@ -1,20 +1,29 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { 
+    View, 
+    StyleSheet, 
+    TouchableOpacity, 
+    TouchableNativeFeedback, 
+    Platform 
+} from 'react-native';
 
 import { CustomText } from './CustomText';
 import COLORS from '../styles/colors';
 
 export const CustonButton = ({ title, onPress, style }) => {
 
+    const Touchable = 
+        Platform.OS === "android" ? TouchableOpacity : TouchableNativeFeedback;
+
     return(
         <View style={[styles.container, style]}>
-            <TouchableOpacity onPress={onPress}>
+            <Touchable onPress={onPress}>
                 <View style={styles.button}>
                     <CustomText weight="bold" style={styles.title}>
                         {title}
                     </CustomText>
                 </View>
-            </TouchableOpacity>
+            </Touchable>
         </View>
     );
 };

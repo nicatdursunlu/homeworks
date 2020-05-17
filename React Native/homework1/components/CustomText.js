@@ -10,11 +10,7 @@ const families = {
 export const CustomText = ({ weight, heading, style, children, ...rest }) => {
 
     let customStyles = { fontFamily: families[weight] || families.regular };
-    // if (heading) {
-    //     customStyles.fontFamily = families.bold;
-    //     customStyles.fontSize = 26;
-    // }
-
+    
     return (
         <Text {...rest} style={{ ...customStyles, ...style }}>
             {children}

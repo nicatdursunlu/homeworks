@@ -10,54 +10,47 @@ const mapStateToProps = (state) => ({
     shopLists: getShopList(state),
 });
 
-export const ProductsCard = connect(mapStateToProps)((props) => {
+export const ProductsCard = connect(mapStateToProps)(({
+    deleteProduct,
+    editProduct,
+    products
+}) => {
+    
+    //const { navigation, shopLists, singleList, route, products, deleteProductFromListBtnHandler } = props;
 
-    const { navigation, shopLists, products } = props;
-    console.log("ProductsCard: ", shopLists);
-    console.log("Products: ", products);
+    //console.log("shopLists: ", shopLists);
+    //console.log("products: ", products);
 
     return(
-        
-            <View style={styles.container}>
-                {shopLists.map((list) => (
-                    <View key={list.id} style={styles.list}>
-
-                        <FlatList 
-                            data={list.products}
-                            keyExtractor={(item) => item.id}
-                            renderItem={({item}) => (
-                                <View key={item.id} style={styles.productsList}>
-
-                                    <View style={styles.row}>
-                                        <TouchableOpacity style={styles.editBtn}>
-                                            <Image style={styles.editImg} source={images.edit} />
-                                        </TouchableOpacity>
-                                        <CustomText style={styles.name}>{item.name}</CustomText>
-                                    </View>
-
-                                    <View style={styles.row}>
-                                        <View style={styles.row}>
-                                            <CustomText style={styles.count}>x{item.count}</CustomText>
-                                            <CustomText style={styles.unit}>{item.unit}</CustomText>
-                                        </View>
-                                        <TouchableOpacity style={styles.closeBtn}>
-                                            <Image style={styles.closeImg} source={images.close} />
-                                        </TouchableOpacity>  
-                                    </View>
-                                    
-                                </View>
-                            )}
-                        />
-
-
-                        {/* {list.products.map((product) => (
-                            <View key={product.id} style={styles.list}>
-                                <CustomText>{product.name}</CustomText>
-                            </View> 
-                        ))} */}
+        <View style={styles.container}>
+            <FlatList 
+                data={products}
+                keyExtractor={(item) => item.id}
+                renderItem={({item}) => (
+                    <View key={item.id} style={styles.productsList}>
+                        <View style={styles.row}>
+                            <TouchableOpacity  
+                                style={styles.editBtn}
+                                onPress={() => editProduct(item)}
+                            >
+                                <Image style={styles.editImg} source={images.edit} />
+                            </TouchableOpacity>
+                            <CustomText style={styles.name}>{item.name}</CustomText>
+                        </View>
+                        <View style={styles.row}>
+                            <CustomText style={styles.count}>x{item.count}{"  "}{item.unit}</CustomText>
+                            <TouchableOpacity 
+                                style={styles.closeBtn}
+                                onPress={() => deleteProduct(item.id)}
+                                //onPress={() => console.log(item.id)}
+                            >
+                                <Image style={styles.closeImg} source={images.close} />
+                            </TouchableOpacity>  
+                        </View>
                     </View>
-                ))}
-            </View>
+                )}
+            />
+        </View>
         
     );
 });

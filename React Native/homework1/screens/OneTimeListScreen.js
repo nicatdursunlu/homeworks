@@ -1,9 +1,11 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 
-import { Header } from '../commons';
-import { ShopListCard } from '../components';
+import { ShopListCard, CustomText } from '../components';
 import { getShopList } from '../redux/data';
+import images from '../styles/images';
+import COLORS from '../styles/colors';
+
 import { connect } from 'react-redux';
 
 
@@ -14,20 +16,43 @@ const mapStateToProps = (state) => ({
 export const OneTimeListScreen = connect(mapStateToProps)((props) => {
 
     const { navigation, shopLists } = props;
-    console.log("ListLayout: ",shopLists);
 
     return(
         <View style={styles.container}>
-            <Header title="One Time Lists" />
+
+            <View style={styles.header}>
+                <CustomText weight="medium" style={styles.title}>
+                    One Time Lists
+                </CustomText>
+                <TouchableOpacity
+                    style={styles.menuBtn}
+                    onPress={navigation.toggleDrawer}
+                >
+                    <Image style={styles.menuIcon} source={images.menu} />
+                </TouchableOpacity>
+            </View>
+
             <View style={styles.listWrapper}>
                <View style={styles.list}>
                     {shopLists
-                        .filter((list) => list.type === "oneTime")
-                        .map((list) => (
-                        <ShopListCard key={list.id} list={list} />
+                        .filter((item) => item.type === "oneTime")
+                        .map((item) => (
+                            <ShopListCard 
+                                key={item.id} 
+                                item={item}
+                                shopListName={item.title}
+                                shopListID={item.id}
+                                onPress={() => navigation.navigate("SingleListScreen", { 
+                                        title: item.title ,
+                                        shopListID: item.id, 
+                                        products: item.products,
+                                    })
+                                }
+                            />
                     ))}
                 </View> 
             </View>
+
         </View>
     );
 });
@@ -37,16 +62,24 @@ const styles= StyleSheet.create({
         backgroundColor: "white",
         flex: 1,
     },
-    // heading: {
-    //     paddingTop: 22,
-    //     backgroundColor: COLORS.main,
-    // },
-    // title: {
-    //     fontSize: 18,
-    //     color: "white",
-    //     textAlign: "center",
-    //     paddingVertical: 17,
-    // },
+    header: {
+        flexDirection: "row",
+        backgroundColor: COLORS.main,
+        height: 116,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    title: {
+        fontSize: 18,
+        color: "white",
+        textAlign: 'center',
+        alignItems: 'center',
+    },
+    menuBtn: {
+        position: 'absolute',
+        zIndex: 3,
+        right: 16,
+    },
 
     listWrapper: {
         borderTopStartRadius: 20,

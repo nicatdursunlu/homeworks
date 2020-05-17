@@ -18,16 +18,15 @@ export const CustomField = ({ placeholder, onChangeText, value, placeholderTextC
 };
 
 const styles = StyleSheet.create({
-    // container: {
-
-    // },
+    container: {
+        width: "65%",
+    },
     field: {
         backgroundColor: COLORS.grey,
         borderRadius: 45,
         paddingVertical: 8,
         textAlign: "center", 
         marginBottom: 15,
-        //paddingHorizontal: "32%",
-        //width: "100%",
+        fontSize: 18,
     }
 });

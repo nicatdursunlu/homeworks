@@ -1,39 +1,39 @@
 import React from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { 
-    CreateListScreen, 
-    UserSettingsScreen, 
-    OneTimeListScreen, 
-    RegularListScreen, 
-    AddToListScreen, 
-    EditScreen, 
-    SingleStaticEditScreen 
-} from '../screens';
 
+import { UserSettingsScreen } from '../screens';
 import { CustomDrawer } from '../commons/CustomDrawer';
-import { CreateStack } from './CreateStack';
-import { OneTimeStack } from './OneTimeStack';
-import { MenuHeaderIcon } from '../components';
+import { ListStack } from './ListStack';
+import { getUser } from '../redux/data';
 
-export const RootDrawer = () => {
+import { connect } from 'react-redux';
+
+
+const mapStateToProps = (state) => ({
+    user: getUser(state),
+});
+
+export const RootDrawer = connect(mapStateToProps)((props) => {
 
     const { Navigator, Screen } = createDrawerNavigator();
+    
+    const { username, imgUrl } = props.user
+    //console.log("props:  ", props);
+    //console.log("propsUser:  ", props.user);
 
     return(
         <NavigationContainer>
             <Navigator
-                // drawerStyle={{ width: 300 }}
-                drawerContent={({navigation}) => (
-                    <CustomDrawer navigation={navigation} />
+                drawerStyle={{ width: 310 }}
+                drawerContent={({ navigation }) => (
+                    <CustomDrawer username={username} imgUrl={imgUrl} navigation={navigation} />
                 )} 
             >
-                <Screen name="Add New List" component={CreateStack} />
-                <Screen name="One Time List" component={OneTimeStack} />
-                <Screen name="Regular List" component={RegularListScreen} />    
-                <Screen name="SingleStaticEditScreen" component={SingleStaticEditScreen} />
+                <Screen name="ListStack" component={ListStack} />
+                <Screen name="UserSettings" component={UserSettingsScreen} />
             </Navigator>
         </NavigationContainer>
     );
-};
+});
 

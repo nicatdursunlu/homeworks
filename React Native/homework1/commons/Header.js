@@ -7,17 +7,13 @@ import images from '../styles/images';
 
 import { useNavigation } from '@react-navigation/native';
 
-export const Header = ({ title, menu=true, back, save, edit }) => {
+export const Header = ({ title, menu = true, back, save, edit }) => {
 
     const navigation = useNavigation();
 
     return(
         <View style={styles.container}>
-            <View style={[
-                styles.header,
-                //{ justifyContent: back ? "space-between" : "flex-end" }
-            ]}>
-
+            <View style={styles.header}>
                 {back && (
                     <TouchableOpacity
                         style={styles.iconsWrapper}

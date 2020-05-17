@@ -1,25 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
     View, 
     StyleSheet, 
     TouchableOpacity, 
     TouchableWithoutFeedback,
     Keyboard,
+    Image,
+    Alert,
+    Dimensions,
+    AsyncStorage,
 } from 'react-native';
 
 import COLORS from '../styles/colors';
-import { CustomText, CustomField, CustonButton } from '../components';
-import { Header } from '../commons';
-import { getShopList, addList } from '../redux/data';
+import { CustomText, CustomField, CustonButton, CustomOption } from '../components';
+import { getShopList, addList, getData } from '../redux/data';
 import { connect } from 'react-redux';
+import images from '../styles/images';
 
 const mapStateToProps = (state) => ({
     shopLists: getShopList(state),
+    data: getData(state),
 });
 
 export const CreateListScreen = connect(mapStateToProps, {
     addList,
-})(({ addList, navigation }) => {
+})(({ addList, navigation, data }) => {
 
 
     const [type, setType] = useState("regular");
@@ -53,66 +58,71 @@ export const CreateListScreen = connect(mapStateToProps, {
                 navigation.navigate("One Time List");
             }
         }
+        else {
+            Alert.alert("Please, fill the gap");
+        }
+        console.log("type: ", args.type);
+        console.log( "title: ", args.title)
     };
 
+    useEffect(() => {
+        AsyncStorage.setItem("data", JSON.stringify(data));
+    }, [])
     
-    const isRegular = type === "regular";
+    //const isRegular = type === "regular";
 
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.container}>
-                    <Header title="New List" menu={false} />
-                    <View style={styles.form}>
-                        <CustomText style={styles.listName}>List Name</CustomText>
+                <View style={styles.header}>
+                    <CustomText weight="medium" style={styles.title}>
+                        New List
+                    </CustomText>
+                    <TouchableOpacity
+                        style={styles.menuBtn}
+                        onPress={navigation.toggleDrawer}
+                    >
+                        <Image style={styles.menuIcon} source={images.menu} />
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.form}>
+                    <CustomText style={styles.listName}>List Name</CustomText>
+                    <View>
                         <CustomField 
                             placeholder="Something for me"
-                            placeholderTextColor="black" 
+                            placeholderTextColor="grey" 
                             onChangeText={(val) => fieldChangneHandler("title", val)}
-                            style={[styles.field]} 
+                            style={styles.field} 
                         />
-
-                        <View style={styles.optionsWrapper}>
-                            <TouchableOpacity 
-                                onPress={() => setType("oneTime")}
-                                style={[styles.options,
-                                    { opacity: type === "oneTime" ? 1 : 0.5 }
-                                ]} 
-                               
-                            >
-                                <CustomText 
-                                    style={
-                                        { fontWeight: type === "oneTime" ? "bold" : "400" }
-                                    }
-                                >
-                                    One Time
-                                </CustomText>
-                            </TouchableOpacity>
-                            <TouchableOpacity 
-                                onPress={() => setType("regular")}
-                                style={[
-                                    styles.options,
-                                    { opacity: type === "regular" ? 1 : 0.5 }
-                                ]}
-                                
-                            >
-                                <CustomText 
-                                    style={
-                                        { fontWeight: type === "regular" ? "bold" : "400" }
-                                    }
-                                >
-                                    Regular
-                                </CustomText>
-                            </TouchableOpacity>  
-                        </View>
-
-                        <CustonButton 
-                            title="Create List" 
-                            style={styles.crateBtn}
-                            onPress={() => createListBtnHandler(type)}
-                        />
-
                     </View>
-
+                    <View style={styles.optionsWrapper}>
+                        <CustomOption 
+                            title="One Time"
+                            style={{...styles.options,
+                                 opacity: type === "oneTime" ? 1 : 0.5 }
+                            }  
+                            onPress={() => setType("oneTime")}
+                            textStyle={
+                                { fontWeight: type === "oneTime" ? "bold" : "400" }
+                            }
+                        />
+                        <CustomOption 
+                            title="Regular"
+                            style={{...styles.options,
+                                opacity: type === "regular" ? 1 : 0.5 }
+                            }  
+                            onPress={() => setType("regular")}
+                            textStyle={
+                                { fontWeight: type === "regular" ? "bold" : "400" }
+                            }
+                        />
+                    </View>
+                    <CustonButton 
+                        title="Create List" 
+                        style={styles.crateBtn}
+                        onPress={() => createListBtnHandler(type)}
+                    />
+                </View>
             </View>
         </TouchableWithoutFeedback>
     );
@@ -123,18 +133,33 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         flex: 1,
     },
+    header: {
+        flexDirection: "row",
+        backgroundColor: COLORS.main,
+        height: 116,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     title: {
         fontSize: 18,
         color: "white",
-        textAlign: "center",
-        paddingVertical: 17,
+        textAlign: 'center',
+        alignItems: 'center',
+    },
+    menuBtn: {
+        position: 'absolute',
+        zIndex: 3,
+        right: 16,
+    },
+    menuIcon: {
+    
     },
     form: {
         paddingTop: 10,
         borderTopStartRadius: 20,
         borderTopEndRadius: 20,
         backgroundColor: "white",
-        alignItems: "center",
+        alignItems: "center",  
         marginTop: -24,
         paddingHorizontal: 5,
     },
@@ -144,7 +169,8 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
     },
     field: {
-        width: 362,
+        justifyContent: 'center',
+        width: Dimensions.get("window").width - 40,
         fontSize: 18,
     }, 
     optionsWrapper: {
@@ -156,12 +182,13 @@ const styles = StyleSheet.create({
 
     options: {
         backgroundColor: COLORS.grey,
-        width: "48%",
+        width: 150,
         marginHorizontal: 1,
         paddingVertical: 13,
         borderRadius: 45,
         marginBottom: 15,
         alignItems: 'center',
+        width:( Dimensions.get('window').width - 50 ) / 2,
     },
     crateBtn: {
         backgroundColor: COLORS.main,
