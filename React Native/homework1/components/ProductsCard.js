@@ -16,8 +16,6 @@ export const ProductsCard = connect(mapStateToProps)(({
     products
 }) => {
     
-    //const { navigation, shopLists, singleList, route, products, deleteProductFromListBtnHandler } = props;
-
     //console.log("shopLists: ", shopLists);
     //console.log("products: ", products);
 

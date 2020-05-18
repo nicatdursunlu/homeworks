@@ -1,5 +1,13 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, TouchableOpacity, Image, Alert, AsyncStorage } from 'react-native';
+import { 
+    View, 
+    StyleSheet, 
+    TouchableOpacity, 
+    Image, 
+    Alert, 
+    AsyncStorage, 
+    ScrollView 
+} from 'react-native';
 
 import { ShopListCard, CustomText } from '../components';
 import { getShopList, deleteList, getData } from '../redux/data';
@@ -35,9 +43,9 @@ export const RegularListScreen = connect(mapStateToProps, {
         );
     };
 
-    useEffect(() => {
-        AsyncStorage.setItem("data", JSON.stringify(data));
-    }, []);
+    // useEffect(() => {
+    //     AsyncStorage.setItem("data", JSON.stringify(data));
+    // }, []);
 
     return(
         <View style={styles.container}>
@@ -54,25 +62,28 @@ export const RegularListScreen = connect(mapStateToProps, {
             </View>
 
             <View style={styles.listWrapper}>
-               <View style={styles.list}>
-                    {shopLists
-                        .filter((item) => item.type === "regular")
-                        .map((item) => (
-                            <ShopListCard 
-                                key={item.id} 
-                                item={item}
-                                shopListName={item.title}
-                                shopListID={item.id}
-                                onLongPress={() => deleteListHandler(item.id)}
-                                onPress={() => navigation.navigate("SingleListScreen", { 
-                                        title: item.title ,
-                                        shopListID: item.id, 
-                                        products: item.products,
-                                    })
-                                }
-                            />
-                    ))}
-                </View> 
+                <ScrollView>
+                    <View style={styles.list}>
+                        {shopLists
+                            .filter((item) => item.type === "regular")
+                            .map((item) => (
+                                <ShopListCard 
+                                    key={item.id} 
+                                    item={item}
+                                    shopListName={item.title}
+                                    shopListID={item.id}
+                                    listType="regular"
+                                    onLongPress={() => deleteListHandler(item.id)}
+                                    onPress={() => navigation.navigate("SingleListScreen", { 
+                                            title: item.title ,
+                                            shopListID: item.id, 
+                                            products: item.products,
+                                        })
+                                    }
+                                />
+                        ))}
+                    </View> 
+                </ScrollView>
             </View>
 
         </View>
@@ -110,6 +121,7 @@ const styles= StyleSheet.create({
         backgroundColor: "white",
         alignItems: "center",
         marginTop: -24,
+        marginBottom: 100,
     },
     list: {
         margin: 16,

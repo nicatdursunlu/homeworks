@@ -7,13 +7,12 @@ import {
     Image, 
 } from 'react-native';
 
-import { CustomText, CustonButton, SingleListCard } from '../components';
+import { CustomText, SingleListCard } from '../components';
 
 import { getShopList, changeBuyStatus, resetProduct } from '../redux/data';
 import { connect } from 'react-redux';
 import COLORS from '../styles/colors';
 import images from '../styles/images';
-import { useNavigation } from '@react-navigation/native';
 
 const mapStateToProps = (state) => ({
     shopLists: getShopList(state),
@@ -37,16 +36,15 @@ export const SingleListScreen = connect(mapStateToProps, {
     //console.log("navigation:  ", navigation);
     //console.log("product:  ", product);
     //console.log("boughtProductCount:  ", boughtProductCount);
-    console.log("boughtProductCount:  ", boughtProductCount);
+    //console.log("singleListType:  ", singleList.type);
 
     const toggleForBuy = (shopListID, productID) => {
         changeBuyStatus({ shopListID, productID });
-        //boughtProductCount++;
     };
 
     const resetBtnHandler = () => {
         resetProduct({ singleListID: singleList.id });
-    }
+    };
 
     return(
         <View style={styles.container}>
@@ -72,11 +70,15 @@ export const SingleListScreen = connect(mapStateToProps, {
 
             <View style={styles.body}>
                 <View style={styles.resetRow}>
-                    <TouchableOpacity style={styles.resetBtn} onPress={resetBtnHandler}>
-                        <CustomText weight="bold" style={styles.resetBtnTitle}>
-                            Reset
-                        </CustomText>
-                    </TouchableOpacity>
+                    {singleList.type === "regular" ? (
+                        <TouchableOpacity style={styles.resetBtn} onPress={resetBtnHandler}>
+                            <CustomText weight="bold" style={styles.resetBtnTitle}>
+                                Reset
+                            </CustomText>
+                        </TouchableOpacity>
+                        ) : (
+                        <CustomText></CustomText>
+                    )}
                     <CustomText style={styles.productsCount}>
                         {boughtProductCount} / {productsCount}
                     </CustomText>
@@ -91,6 +93,7 @@ export const SingleListScreen = connect(mapStateToProps, {
                             unit={item.unit}
                             bought={item.bought}
                             onLongPress={() => toggleForBuy(singleList.id, item.id)}
+                            listType={singleList.type}
                         />
                     )}
                 />
@@ -150,6 +153,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: "space-between",
         alignItems: 'center',
+        marginBottom: 10,
     },
     resetBtn: {
         backgroundColor: COLORS.main,

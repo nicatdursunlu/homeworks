@@ -3,8 +3,6 @@ import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 import { CustomText } from '../components/CustomText';
 import COLORS from '../styles/colors';
-import images from '../styles/images';
-
 
 export const CustomDrawer = ({ username, imgUrl, navigation }) => {
     

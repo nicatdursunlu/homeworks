@@ -7,11 +7,11 @@ import {
     Keyboard, 
     TouchableOpacity, 
     Image,
-    Alert
+    Alert,
+    Dimensions
 } from 'react-native';
 
-import { CustomText, CustomField, CustonButton, MenuHeaderIcon } from '../components';
-import { Header } from '../commons';
+import { CustomText, CustomField, CustonButton } from '../components';
 import COLORS from '../styles/colors';
 import { getUser, changeUser } from '../redux/data';
 import { connect } from 'react-redux';
@@ -67,7 +67,6 @@ export const UserSettingsScreen = connect(mapStateToProps, {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.container}>
                 <View style={styles.horizontal}>
-                    {/* <Header title="User Settings" menu={false} /> */}
                     <View style={styles.header}>
                         <CustomText weight="medium" style={styles.title}>
                             User Settings
@@ -85,23 +84,27 @@ export const UserSettingsScreen = connect(mapStateToProps, {
                         <CustomText weight="medium" style={styles.usernameText}>
                             username
                         </CustomText>
-                        <CustomField 
-                            style={styles.field} 
-                            placeholder="username"
-                            placeholderTextColor="grey"
-                            value={fields.username}
-                            onChangeText={(val) => fieldChangneHandler("username", val)}
-                        />
+                        <View>
+                            <CustomField 
+                                style={styles.field} 
+                                placeholder="username"
+                                placeholderTextColor="grey"
+                                value={fields.username}
+                                onChangeText={(val) => fieldChangneHandler("username", val)}
+                            />
+                        </View>
                         <CustomText weight="medium" style={styles.usernameText}>
                             avatar url
                         </CustomText>
-                        <CustomField 
-                            style={styles.field} 
-                            placeholder="avatar url"
-                            placeholderTextColor="grey"
-                            value={fields.imgUrl}
-                            onChangeText={(val) => fieldChangneHandler("imgUrl", val)}
-                        />
+                        <View>
+                            <CustomField 
+                                style={styles.field} 
+                                placeholder="avatar url"
+                                placeholderTextColor="grey"
+                                value={fields.imgUrl}
+                                onChangeText={(val) => fieldChangneHandler("imgUrl", val)}
+                            />
+                        </View>
                         <CustonButton 
                             title="Save Changes" 
                             style={styles.btn}
@@ -139,7 +142,6 @@ const styles = StyleSheet.create({
     },
     form: {
         marginTop: 20,
-        alignItems: "center",
         borderTopStartRadius: 20,
         borderTopEndRadius: 20,
         backgroundColor: "white",
@@ -147,16 +149,14 @@ const styles = StyleSheet.create({
         marginTop: -24,
     },
     usernameText: {
-
         paddingVertical: 10,
         color: COLORS.dark,
     },
     field: {
-        width: 380,
+        //width: 320,
+        width: Dimensions.get("window").width - 40,
+        //marginRight: 100,
     }, 
-    horizontal: {
-        //marginHorizontal: 16,
-    },
     btn: {
         backgroundColor: COLORS.main,
     }

@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 
 import { CustomText } from './CustomText';
-import COLORS from '../styles/colors';
 
 export const CustonButton = ({ title, onPress, style }) => {
 

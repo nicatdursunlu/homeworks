@@ -57,14 +57,75 @@ const initialState = {
                     unit: "kg",
                     bought: false,
                 },
-
-
                 { 
                     id: createID(), 
                     name: "Cheese", 
                     count: 0.3, 
                     unit: "kg",
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Cheese", 
+                    count: 0.3, 
+                    unit: "kg",
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Cheese", 
+                    count: 0.3, 
+                    unit: "kg",
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Cheese", 
+                    count: 0.3, 
+                    unit: "kg",
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Cheese", 
+                    count: 0.3, 
+                    unit: "kg",
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Cheese", 
+                    count: 0.3, 
+                    unit: "kg",
+                    bought: true,
+                },
+            ]
+        },
+        {
+            id: createID(),
+            title: "Everything for breakfast",
+            type: "oneTime",
+            products : [
+                { 
+                    id: createID(), 
+                    name: "Pasta", 
+                    count: 2, 
+                    unit: "pkg",
                     bought: false,
+                },
+                { 
+                    id: createID(), 
+                    name: "Salt", 
+                    count: 1, 
+                    unit: "pkg", 
+                    bought: false,
+                },
+                { 
+                    id: createID(), 
+                    name: "Tomatoes", 
+                    count: 1, 
+                    unit: "kg",
+                    bought: false, 
                 },
                 { 
                     id: createID(), 
@@ -78,21 +139,42 @@ const initialState = {
                     name: "Cheese", 
                     count: 0.3, 
                     unit: "kg",
-                    bought: false,
+                    bought: true,
                 },
                 { 
                     id: createID(), 
                     name: "Cheese", 
                     count: 0.3, 
                     unit: "kg",
-                    bought: false,
+                    bought: true,
                 },
                 { 
                     id: createID(), 
                     name: "Cheese", 
                     count: 0.3, 
                     unit: "kg",
-                    bought: false,
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Cheese", 
+                    count: 0.3, 
+                    unit: "kg",
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Cheese", 
+                    count: 0.3, 
+                    unit: "kg",
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Cheese", 
+                    count: 0.3, 
+                    unit: "kg",
+                    bought: true,
                 },
             ]
         },
@@ -129,6 +211,27 @@ const initialState = {
                     unit: "kg",
                     bought: false,
                 },
+                { 
+                    id: createID(), 
+                    name: "Cheese", 
+                    count: 0.3, 
+                    unit: "kg",
+                    bought: false,
+                },
+                { 
+                    id: createID(), 
+                    name: "Cheese", 
+                    count: 0.3, 
+                    unit: "kg",
+                    bought: false,
+                },
+                { 
+                    id: createID(), 
+                    name: "Cheese", 
+                    count: 0.3, 
+                    unit: "kg",
+                    bought: false,
+                },
             ]
         },
         {
@@ -141,28 +244,175 @@ const initialState = {
                     name: "Pasta", 
                     count: 2, 
                     unit: "pkg", 
-                    bought: false,
+                    bought: true,
                 },
                 { 
                     id: createID(), 
                     name: "Salt", 
                     count: 1, 
                     unit: "pkg",
-                    bought: false,
+                    bought: true,
                 },
                 { 
                     id: createID(), 
                     name: "Tomatoes", 
                     count: 1, 
                     unit: "kg",
-                    bought: false,
+                    bought: true,
                 },
                 { 
                     id: createID(), 
                     name: "Cheese", 
                     count: 0.3, 
                     unit: "kg", 
-                    bought: false,
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Pasta", 
+                    count: 2, 
+                    unit: "pkg", 
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Salt", 
+                    count: 1, 
+                    unit: "pkg",
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Tomatoes", 
+                    count: 1, 
+                    unit: "kg",
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Cheese", 
+                    count: 0.3, 
+                    unit: "kg", 
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Pasta", 
+                    count: 2, 
+                    unit: "pkg", 
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Salt", 
+                    count: 1, 
+                    unit: "pkg",
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Tomatoes", 
+                    count: 1, 
+                    unit: "kg",
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Cheese", 
+                    count: 0.3, 
+                    unit: "kg", 
+                    bought: true,
+                },
+            ]
+        },
+        {
+            id: createID(),
+            title: "Kitchen repair",
+            type: "regular",
+            products : [
+                { 
+                    id: createID(), 
+                    name: "Pasta", 
+                    count: 2, 
+                    unit: "pkg", 
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Salt", 
+                    count: 1, 
+                    unit: "pkg",
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Tomatoes", 
+                    count: 1, 
+                    unit: "kg",
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Cheese", 
+                    count: 0.3, 
+                    unit: "kg", 
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Pasta", 
+                    count: 2, 
+                    unit: "pkg", 
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Salt", 
+                    count: 1, 
+                    unit: "pkg",
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Tomatoes", 
+                    count: 1, 
+                    unit: "kg",
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Cheese", 
+                    count: 0.3, 
+                    unit: "kg", 
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Pasta", 
+                    count: 2, 
+                    unit: "pkg", 
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Salt", 
+                    count: 1, 
+                    unit: "pkg",
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Tomatoes", 
+                    count: 1, 
+                    unit: "kg",
+                    bought: true,
+                },
+                { 
+                    id: createID(), 
+                    name: "Cheese", 
+                    count: 0.3, 
+                    unit: "kg", 
+                    bought: true,
                 },
             ]
         }
@@ -198,6 +448,7 @@ export function dataReducer(state = initialState, { type, payload }) {
                 shopLists: state.shopLists.map((shopList) => {
                     if(shopList.id === payload.shopListID) {
                         return {
+                            ...shopList,
                             products: [
                                 {
                                     id: createID(),
@@ -208,7 +459,7 @@ export function dataReducer(state = initialState, { type, payload }) {
                                 },
                                 ...shopList.products,
                             ],
-                            ...shopList,
+                            
                         };
                     }
                     return shopList;
@@ -240,10 +491,9 @@ export function dataReducer(state = initialState, { type, payload }) {
                                 if(product.id === payload.productID) {
                                     return {
                                         ...product,
-                                        // name: payload,
-                                        // count: payload,
-                                        // unit: payload
-                                        ...payload.product,
+                                        name: payload.name,
+                                        count: payload.count,
+                                        unit: payload.unit,
                                     };
                                 }
                                 return product;
@@ -281,15 +531,12 @@ export function dataReducer(state = initialState, { type, payload }) {
                 shopLists: state.shopLists.map((shopList) => {
                     if(shopList.id === payload.shopListID) {
                         return {
-                            ...state,
+                            ...shopList,
                             products: shopList.products.map((product) => {
-                                if(product.id === payload.productID) {
-                                    return {
-                                        ...product,
-                                        bought: false,
-                                    };
-                                }
-                                return product;
+                                return {
+                                    ...product,
+                                    bought: false,
+                                };
                             }),
                         };
                     }

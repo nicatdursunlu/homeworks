@@ -56,13 +56,11 @@ export const AddProductToListScreen = connect(mapStateToProps, {
     //console.log("products:  ", products);
     //console.log("Title:  ", singleList.title);
 
-    const [productName, setProductName] = useState("milk");
+    const [productName, setProductName] = useState("");
     const [unit, setUnit] = useState("kg");
     const [count, setCount] = useState(2);
     const [productID, setProductID] = useState("");
     const [isEditMode, setIsEditMode] = useState(false);
-
-    //const [shopListID, setShopListID] = useState(null);
 
     const clearFields = () => {
         setProductName("");
@@ -101,8 +99,6 @@ export const AddProductToListScreen = connect(mapStateToProps, {
         }
     };
 
-    console.log("singleList.id:  ", singleList.id)
-
     const deleteBtnHandler = (productID) => {
 
         const args = {
@@ -126,31 +122,26 @@ export const AddProductToListScreen = connect(mapStateToProps, {
     };
 
     const editBtnHandler = (product) => {
+        setProductID(product.id);
         setProductName(product.name);
+        setCount(product.count.toString());
         setUnit(product.unit);
-        //setCount(product.count);
         setIsEditMode(true);
     };
+
 
     const updateBtnHandler = () => {
         const args = {
             shopListID: singleList.id,
-            product: {
-                productID,
-                productName,
-                count,
-                unit,
-            }
+            productID,
+            name: productName,
+            count,
+            unit,
         };
 
         updateProduct(args);
         Alert.alert("Product is updated");
     };
-
-    useEffect(() => {
-        AsyncStorage.setItem("data", JSON.stringify(data));
-    }, []);
-
 
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -194,6 +185,7 @@ export const AddProductToListScreen = connect(mapStateToProps, {
                             <CustomField 
                                 style={styles.productName} 
                                 value={productName}
+                                placeholder="product name"
                                 onChangeText={setProductName}
                             />
                             <View style={[styles.row, styles.count]}>
@@ -369,10 +361,10 @@ const styles = StyleSheet.create({
     },
     productName: {
         fontFamily: "MontserratBold",
-        width: Dimensions.get("window").width - 160,
+        width: Dimensions.get("window").width - 170,
     }, 
     countInput: {
-        width: "15%",
+        width: "19%",
         textAlign: 'center',
         //height: "5%",
     },
@@ -422,7 +414,6 @@ const styles = StyleSheet.create({
     },
     border: {
         paddingBottom: 21,
-        borderBottomWidth: 10,
         borderBottomColor: "#E5E5E5",
         borderBottomWidth: 2,
     }

@@ -1,8 +1,15 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { 
+    View, 
+    StyleSheet, 
+    TouchableOpacity, 
+    Image, 
+    Alert, 
+    ScrollView 
+} from 'react-native';
 
 import { ShopListCard, CustomText } from '../components';
-import { getShopList } from '../redux/data';
+import { getShopList, deleteList } from '../redux/data';
 import images from '../styles/images';
 import COLORS from '../styles/colors';
 
@@ -13,9 +20,28 @@ const mapStateToProps = (state) => ({
     shopLists: getShopList(state),
 });
 
-export const OneTimeListScreen = connect(mapStateToProps)((props) => {
+export const OneTimeListScreen = connect(mapStateToProps, {
+    deleteList
+})((props) => {
 
-    const { navigation, shopLists } = props;
+    const { navigation, shopLists, deleteList, data } = props;
+
+    const deleteListHandler = (shopListID) => {
+        Alert.alert(
+            "Are you sure you want to delete this list?", 
+            "If you delete it, you can not recover it", [
+                {
+                    text: "No",
+                    style: "cancel",
+                },
+                {
+                    text: "Yes",
+                    onPress: () => deleteList({ shopListID }),
+                }
+            ]
+        );
+    };
+
 
     return(
         <View style={styles.container}>
@@ -33,24 +59,28 @@ export const OneTimeListScreen = connect(mapStateToProps)((props) => {
             </View>
 
             <View style={styles.listWrapper}>
-               <View style={styles.list}>
-                    {shopLists
-                        .filter((item) => item.type === "oneTime")
-                        .map((item) => (
-                            <ShopListCard 
-                                key={item.id} 
-                                item={item}
-                                shopListName={item.title}
-                                shopListID={item.id}
-                                onPress={() => navigation.navigate("SingleListScreen", { 
-                                        title: item.title ,
-                                        shopListID: item.id, 
-                                        products: item.products,
-                                    })
-                                }
-                            />
-                    ))}
-                </View> 
+                <ScrollView>
+                    <View style={styles.list}>
+                        {shopLists
+                            .filter((item) => item.type === "oneTime")
+                            .map((item) => (
+                                <ShopListCard 
+                                    key={item.id} 
+                                    item={item}
+                                    shopListName={item.title}
+                                    shopListID={item.id}
+                                    listType="oneTime"
+                                    onLongPress={() => deleteListHandler(item.id)}
+                                    onPress={() => navigation.navigate("SingleListScreen", { 
+                                            title: item.title ,
+                                            shopListID: item.id, 
+                                            products: item.products,
+                                        })
+                                    }
+                                />
+                        ))}
+                    </View> 
+                </ScrollView>
             </View>
 
         </View>
@@ -87,6 +117,7 @@ const styles= StyleSheet.create({
         backgroundColor: "white",
         alignItems: "center",
         marginTop: -24,
+        marginBottom: 100,
     },
     list: {
         margin: 16,

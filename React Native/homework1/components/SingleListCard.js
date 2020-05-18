@@ -3,14 +3,19 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { CustomText } from './CustomText';
 import COLORS from '../styles/colors';
 
-export const SingleListCard = ({ name, count, unit, onLongPress, bought }) => {
+export const SingleListCard = ({ name, count, unit, onLongPress, bought, listType }) => {
 
+
+    console.log("bought:  ", bought);
 
     return(
         <TouchableOpacity 
-            onLongPress={onLongPress}
-            
-            //activeOpacity={0.5}
+            onLongPress={onLongPress} 
+            disabled={
+                (listType === "oneTime" && bought === true) 
+                    ? true 
+                    : false
+            } 
         >
             <View  
                 style={{

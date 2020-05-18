@@ -35,6 +35,13 @@ export const CreateListScreen = connect(mapStateToProps, {
         type: "regular",
     });
 
+    const clearFields = () => {
+        setFields({
+            title: "",
+            type: "regular",
+        })
+    }
+
     const fieldChangneHandler = (name, value) => {
         setFields((fields) => ({
             ...fields,
@@ -51,6 +58,7 @@ export const CreateListScreen = connect(mapStateToProps, {
 
         if(fields.title.trim() !== "") {
             addList(args);
+            clearFields();
             if(args.type === "regular") {
                 navigation.navigate("Regular List"); 
             }
@@ -61,9 +69,10 @@ export const CreateListScreen = connect(mapStateToProps, {
         else {
             Alert.alert("Please, fill the gap");
         }
-        console.log("type: ", args.type);
-        console.log( "title: ", args.title)
+        // console.log("type: ", args.type);
+        // console.log( "title: ", args.title)
     };
+
 
     useEffect(() => {
         AsyncStorage.setItem("data", JSON.stringify(data));

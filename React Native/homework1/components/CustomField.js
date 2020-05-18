@@ -3,7 +3,9 @@ import { View, StyleSheet, TextInput } from 'react-native';
 
 import COLORS from '../styles/colors';
 
-export const CustomField = ({ placeholder, onChangeText, value, placeholderTextColor, style}) => {
+export const CustomField = ({ 
+    placeholder, onChangeText, value, placeholderTextColor, style
+}) => {
     return(
         <View style={styles.container}>
             <TextInput
