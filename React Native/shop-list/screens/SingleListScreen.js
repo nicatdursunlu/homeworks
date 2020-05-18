@@ -41,7 +41,7 @@ export const SingleListScreen = connect(mapStateToProps, {
 
     const toggleForBuy = (shopListID, productID) => {
         changeBuyStatus({ shopListID, productID });
-        Alert.alert("Product is bought");
+        //Alert.alert("Product is bought");
     };
 
     const resetBtnHandler = () => {
