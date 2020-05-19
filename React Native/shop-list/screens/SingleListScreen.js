@@ -28,11 +28,12 @@ export const SingleListScreen = connect(mapStateToProps, {
     const products = route.params.products;
     const title = route.params.title;
     const productsCount = products.length;
-    const boughtProductCount = products.filter((product) => product.bought === true).length;
     const id = route.params.shopListID;
     const singleList = props.shopLists.find((item) => item.id === id);
+    const boughtProductCount = singleList.products.filter(
+        (product) => product.bought === true).length;
     
-
+    //console.log("boughtProduct:  ", boughtProduct);
     //const navigation = useNavigation();
     //console.log("navigation:  ", navigation);
     //console.log("product:  ", product);
@@ -139,7 +140,6 @@ const styles = StyleSheet.create({
     editIcon: {
         marginRight: 20,
     },
-
 
 
     body: {
