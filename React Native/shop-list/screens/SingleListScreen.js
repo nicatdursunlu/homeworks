@@ -45,7 +45,7 @@ export const SingleListScreen = connect(mapStateToProps, {
     };
 
     const resetBtnHandler = () => {
-        resetProduct({ singleListID: singleList.id });
+        resetProduct({ shopListID: singleList.id });
     };
 
     return(
