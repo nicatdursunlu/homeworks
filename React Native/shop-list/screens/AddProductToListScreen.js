@@ -124,7 +124,7 @@ export const AddProductToListScreen = connect(mapStateToProps, {
     const editBtnHandler = (product) => {
         setProductID(product.id);
         setProductName(product.name);
-        setCount(product.count.toString());
+        setCount(product.count);
         setUnit(product.unit);
         setIsCreate(false);
     };
@@ -141,6 +141,7 @@ export const AddProductToListScreen = connect(mapStateToProps, {
 
         updateProduct(args);
         Alert.alert("Product is updated");
+        setIsCreate(true);
     };
 
     const cancelBtnHandler = () => {
