@@ -51,6 +51,7 @@ export const UserSettingsScreen = connect(mapStateToProps, {
         else {
             changeUser(args);
             Alert.alert("Your changes are saved");
+            navigation.toggleDrawer();
         }
         
     };

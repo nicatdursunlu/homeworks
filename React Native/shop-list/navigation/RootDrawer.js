@@ -8,6 +8,7 @@ import { ListStack } from './ListStack';
 import { getUser } from '../redux/data';
 
 import { connect } from 'react-redux';
+import { Dimensions } from 'react-native';
 
 
 const mapStateToProps = (state) => ({
@@ -22,10 +23,12 @@ export const RootDrawer = connect(mapStateToProps)((props) => {
     //console.log("props:  ", props);
     //console.log("propsUser:  ", props.user);
 
+    const width = Dimensions.get("screen").width * 0.80;
+
     return(
         <NavigationContainer>
             <Navigator
-                drawerStyle={{ width: 310 }}
+                drawerStyle={{ width: width }}
                 drawerContent={({ navigation }) => (
                     <CustomDrawer username={username} imgUrl={imgUrl} navigation={navigation} />
                 )} 
