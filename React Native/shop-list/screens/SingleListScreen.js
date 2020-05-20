@@ -73,7 +73,7 @@ export const SingleListScreen = connect(mapStateToProps, {
 
             <View style={styles.body}>
                 <View style={styles.resetRow}>
-                    {singleList.type === "regular" ? (
+                    {(singleList.type === "regular" && productsCount) ? (
                         <TouchableOpacity style={styles.resetBtn} onPress={resetBtnHandler}>
                             <CustomText weight="bold" style={styles.resetBtnTitle}>
                                 Reset
@@ -82,9 +82,12 @@ export const SingleListScreen = connect(mapStateToProps, {
                         ) : (
                         <CustomText></CustomText>
                     )}
-                    <CustomText style={styles.productsCount}>
-                        {boughtProductCount} / {productsCount}
-                    </CustomText>
+                    {productsCount != 0 && (
+                        <CustomText style={styles.productsCount}>
+                            {boughtProductCount} / {productsCount}
+                        </CustomText>
+                    )}
+                    
                 </View>
                 <FlatList
                     data={singleList.products}
