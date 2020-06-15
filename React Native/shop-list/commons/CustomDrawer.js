@@ -5,9 +5,6 @@ import { CustomText } from '../components/CustomText';
 import COLORS from '../styles/colors';
 
 export const CustomDrawer = ({ username, imgUrl, navigation }) => {
-    
-    // console.log("username:  ", username);
-    // console.log("imgUrl:  ", imgUrl);
 
     return(
         <View style={styles.container}>

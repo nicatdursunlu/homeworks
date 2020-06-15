@@ -5,13 +5,11 @@ import {
     TouchableOpacity, 
     FlatList, 
     Image,
-    Alert, 
 } from 'react-native';
+import { connect } from 'react-redux';
 
 import { CustomText, SingleListCard } from '../components';
-
 import { getShopList, changeBuyStatus, resetProduct } from '../redux/data';
-import { connect } from 'react-redux';
 import COLORS from '../styles/colors';
 import images from '../styles/images';
 
@@ -32,17 +30,9 @@ export const SingleListScreen = connect(mapStateToProps, {
     const singleList = props.shopLists.find((item) => item.id === id);
     const boughtProductCount = singleList.products.filter(
         (product) => product.bought === true).length;
-    
-    //console.log("boughtProduct:  ", boughtProduct);
-    //const navigation = useNavigation();
-    //console.log("navigation:  ", navigation);
-    //console.log("product:  ", product);
-    //console.log("boughtProductCount:  ", boughtProductCount);
-    //console.log("singleListType:  ", singleList.type);
 
     const toggleForBuy = (shopListID, productID) => {
         changeBuyStatus({ shopListID, productID });
-        //Alert.alert("Product is bought");
     };
 
     const resetBtnHandler = () => {

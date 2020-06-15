@@ -9,7 +9,7 @@ export const SingleListCard = ({ name, count, unit, onLongPress, bought, listTyp
         <TouchableOpacity 
             onLongPress={onLongPress} 
             disabled={
-                (listType === "oneTime" && bought === true) 
+                (listType === "One Time" && bought === true) 
                     ? true 
                     : false
             } 

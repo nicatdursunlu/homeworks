@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-
-import { RootDrawer } from './navigation/RootDrawer';
-import { loadFonts } from './styles/fonts';
 import { Provider } from "react-redux";
-
-import store from './redux';
 import { AppLoading } from 'expo';
 
-export default class App extends Component {
+import store from './redux';
+import { RootDrawer } from './navigation/RootDrawer';
+import { loadFonts } from './styles/fonts';
 
-  //const [loaded, setLoaded] = useState(false);
+export default class App extends Component {
 
   constructor(props) {
     super(props);
@@ -35,7 +32,7 @@ export default class App extends Component {
 
     return (
       <Provider store={store}>
-          <RootDrawer />
+        <RootDrawer />
       </Provider>
     );
   }

@@ -62,14 +62,14 @@ export const OneTimeListScreen = connect(mapStateToProps, {
                 <ScrollView>
                     <View style={styles.list}>
                         {shopLists
-                            .filter((item) => item.type === "oneTime")
+                            .filter((item) => item.type === "One Time")
                             .map((item) => (
                                 <ShopListCard 
                                     key={item.id} 
                                     item={item}
                                     shopListName={item.title}
                                     shopListID={item.id}
-                                    listType="oneTime"
+                                    listType="One Time"
                                     onLongPress={() => deleteListHandler(item.id)}
                                     onPress={() => navigation.navigate("SingleListScreen", { 
                                             title: item.title ,

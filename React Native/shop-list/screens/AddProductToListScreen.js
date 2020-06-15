@@ -9,14 +9,14 @@ import {
     Image,
     Alert, 
     Dimensions,
-    AsyncStorage
 } from 'react-native';
 import { 
     CustomText, 
     CustomField, 
     CustonButton,
     ProductsCard, 
-    CustomOption 
+    CustomOption, 
+    RadioGroup
 } from '../components';
 import { 
     getShopList, 
@@ -52,11 +52,23 @@ export const AddProductToListScreen = connect(mapStateToProps, {
     const { singleList } = route.params;
     const { products } = shopLists.find((item) => item.id === singleList.id);
 
-    //console.log("singleList:  ", singleList);
-    //console.log("products:  ", products);
-    //console.log("Title:  ", singleList.title);
+    const UNIT = ["pkg", "kg", "litre", "bott"];
+    const fieldsInitialState = {
+        name: "",
+        count: 1,
+        unit: UNIT[0],
+    };
 
-    const [productName, setProductName] = useState("");
+    const [fields, setFields] = useState(fieldsInitialState);
+
+    const fieldChangeHandler = (name, value) => {
+        setFields((fields) => ({
+        ...fields,
+        [name]: value,
+        }));
+    };
+
+    //const [productName, setProductName] = useState("");
     const [unit, setUnit] = useState("kg");
     const [count, setCount] = useState(2);
     const [productID, setProductID] = useState("");
@@ -78,21 +90,11 @@ export const AddProductToListScreen = connect(mapStateToProps, {
         }
     };
 
-    const addToListBtnHandler = (unit) => {
-
-        const args = {
-            shopListID: singleList.id,
-            name: productName,
-            count,
-            unit,
-            bought: false,
-        };
-
-        if(productName.trim() !== "") {
-            addProduct(args);
+    const addToListBtnHandler = () => {
+        if(fields.name.trim() !== "") {
+            addProduct({ ...fields, shopListID: singleList.id });
             Alert.alert("","Product seccessfully added to list");
-            clearFields();
-            //console.log("args:  ", args);
+            setFields(fieldsInitialState);
         }
         else {
             Alert.alert("Please, fill the gap");
@@ -157,7 +159,7 @@ export const AddProductToListScreen = connect(mapStateToProps, {
                         style={styles.arrowBackBtn}
                         onPress={() => 
                             navigation.navigate(
-                                singleList.type === "regular" 
+                                singleList.type === "Regular" 
                                     ? "Regular List" 
                                     : "One Time List"
                                 )
@@ -190,9 +192,10 @@ export const AddProductToListScreen = connect(mapStateToProps, {
                         <View style={[styles.row, styles.marginTop]}>
                             <CustomField 
                                 style={styles.productName} 
-                                value={productName}
+                                value={fields.name}
                                 placeholder="product name"
-                                onChangeText={setProductName}
+                                //onChangeText={setProductName}
+                                onChangeText={(value) => fieldChangeHandler("name", value)} 
                             />
                             <View style={[styles.row, styles.count]}>
                                 <TouchableOpacity onPress={decreaseCount}>
@@ -214,8 +217,7 @@ export const AddProductToListScreen = connect(mapStateToProps, {
                             </View>
                         </View>
 
-
-                        <View style={[styles.row, styles.marginBottom]}>
+                        {/* <View style={[styles.row, styles.marginBottom]}>
                             <CustomOption
                                 title="pkg"
                                 style={{
@@ -265,13 +267,20 @@ export const AddProductToListScreen = connect(mapStateToProps, {
                                     textAlign: 'center' 
                                 }}
                             />
-                        </View>
+                        </View> */}
+                            
+                        <RadioGroup 
+                            value={fields.unit} 
+                            onValueChange={(value) => fieldChangeHandler("unit", value)} 
+                            contentContainerStyle={styles.types} 
+                            options={UNIT} 
+                        />
 
                         {isCreate ? (
                             <CustonButton 
                                 title="Add to list"
                                 style={styles.addBtn} 
-                                onPress={() => addToListBtnHandler(unit)}
+                                onPress={addToListBtnHandler}
                             />  
                         ) : ( 
                             <View style={styles.editBtnsWrapper}>

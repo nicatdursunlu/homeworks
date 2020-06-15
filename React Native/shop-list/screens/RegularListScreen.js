@@ -43,10 +43,6 @@ export const RegularListScreen = connect(mapStateToProps, {
         );
     };
 
-    // useEffect(() => {
-    //     AsyncStorage.setItem("data", JSON.stringify(data));
-    // }, []);
-
     return(
         <View style={styles.container}>
             <View style={styles.header}>
@@ -65,14 +61,14 @@ export const RegularListScreen = connect(mapStateToProps, {
                 <ScrollView>
                     <View style={styles.list}>
                         {shopLists
-                            .filter((item) => item.type === "regular")
+                            .filter((item) => item.type === "Regular")
                             .map((item) => (
                                 <ShopListCard 
                                     key={item.id} 
                                     item={item}
                                     shopListName={item.title}
                                     shopListID={item.id}
-                                    listType="regular"
+                                    listType="Regular"
                                     onLongPress={() => deleteListHandler(item.id)}
                                     onPress={() => navigation.navigate("SingleListScreen", { 
                                             title: item.title ,

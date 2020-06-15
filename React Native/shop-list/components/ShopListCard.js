@@ -18,11 +18,11 @@ export const ShopListCard = ({ item, onPress, listType, onLongPress }) => {
     }
     else {
         progress =  boughtProductCount / productsCount;
-        if(progress === 1 && listType === "oneTime") {
+        if(progress === 1 && listType === "One Time") {
             isFull = true;
         }
     }
-
+    
     const width = Dimensions.get("window").width - 70;
 
     return(
