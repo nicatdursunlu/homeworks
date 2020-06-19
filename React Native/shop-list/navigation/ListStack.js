@@ -9,18 +9,42 @@ import {
     SingleListScreen 
 } from '../screens';
 import { headerDefaultStyles } from '../styles/headerDefaultStyles';
+import { HeaderIcon } from '../components';
 
 const { Navigator, Screen } = createStackNavigator();
 
 export const ListStack = () => {
     return(
-        <Navigator 
-        //screenOptions={headerDefaultStyles} 
-        headerMode="none"
-        >
-            <Screen name="Create List" component={CreateListScreen} />
-            <Screen name="Regular List" component={RegularListScreen} />
-            <Screen name="One Time List" component={OneTimeListScreen} />
+        <Navigator screenOptions={headerDefaultStyles}>
+            <Screen 
+                name="One Time List" 
+                component={OneTimeListScreen}
+                options={({ navigation }) => ({
+                    headerRight: () => (
+                        <HeaderIcon 
+                            side="right" 
+                            iconName="menu"
+                            onPress={() => navigation.toggleDrawer()}
+                        />
+                    )
+                })}
+            />
+            <Screen 
+                name="Regular List" 
+                component={RegularListScreen} 
+                options={({ navigation }) => ({
+                    headerRight: () => (
+                        <HeaderIcon 
+                            side="right" 
+                            iconName="menu"
+                            onPress={() => navigation.toggleDrawer()}
+                        />
+                    ),
+                    headerLeft: () => (
+                        <HeaderIcon />
+                    )
+                })}
+            />
             <Screen name="SingleListScreen" component={SingleListScreen} />
             <Screen name="AddProductToListScreen" component={AddProductToListScreen}/>      
         </Navigator>

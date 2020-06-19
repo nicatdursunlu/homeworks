@@ -4,10 +4,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { connect } from 'react-redux';
 
-import { UserSettingsScreen } from '../screens';
 import { CustomDrawer } from '../commons';
 import { ListStack } from './ListStack';
 import { getUser } from '../redux/data';
+import { CreateStack } from './CreateStack';
+import { SettingsStack } from './SettingsStack';
 
 const mapStateToProps = (state) => ({
     user: getUser(state),
@@ -34,7 +35,8 @@ export const RootDrawer = connect(mapStateToProps)((props) => {
                 )} 
             >
                 <Screen name="ListStack" component={ListStack} />
-                <Screen name="UserSettings" component={UserSettingsScreen} />
+                <Screen name="CreateStack" component={CreateStack} />
+                <Screen name="SettingsStack" component={SettingsStack} />
             </Navigator>
         </NavigationContainer>
     );

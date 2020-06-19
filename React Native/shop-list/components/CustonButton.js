@@ -9,7 +9,7 @@ import {
 
 import { CustomText } from './CustomText';
 
-export const CustonButton = ({ title, onPress, style }) => {
+export const CustonButton = ({ title, onPress, style, titleStyle = {} }) => {
 
     const Touchable = 
         Platform.OS === "android" ? TouchableOpacity : TouchableNativeFeedback;
@@ -17,8 +17,8 @@ export const CustonButton = ({ title, onPress, style }) => {
     return(
         <View style={[styles.container, style]}>
             <Touchable onPress={onPress}>
-                <View style={styles.button}>
-                    <CustomText weight="bold" style={styles.title}>
+                <View style={[styles.button]}>
+                    <CustomText weight="bold" style={{ ...styles.title, ...titleStyle }}>
                         {title}
                     </CustomText>
                 </View>

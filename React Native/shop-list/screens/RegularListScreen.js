@@ -1,20 +1,10 @@
-import React, { useEffect } from 'react';
-import { 
-    View, 
-    StyleSheet, 
-    TouchableOpacity, 
-    Image, 
-    Alert, 
-    AsyncStorage, 
-    ScrollView 
-} from 'react-native';
-
-import { ShopListCard, CustomText } from '../components';
-import { getShopList, deleteList, getData } from '../redux/data';
+import React from 'react';
+import { View, StyleSheet, Alert,  ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import COLORS from '../styles/colors';
-import images from '../styles/images';
 
+import { ShopListCard } from '../components';
+import { Container } from '../commons';
+import { getShopList, deleteList, getData } from '../redux/data';
 
 const mapStateToProps = (state) => ({
     shopLists: getShopList(state),
@@ -44,19 +34,7 @@ export const RegularListScreen = connect(mapStateToProps, {
     };
 
     return(
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <CustomText weight="medium" style={styles.title}>
-                    Regular Lists
-                </CustomText>
-                <TouchableOpacity
-                    style={styles.menuBtn}
-                    onPress={navigation.toggleDrawer}
-                >
-                    <Image style={styles.menuIcon} source={images.menu} />
-                </TouchableOpacity>
-            </View>
-
+        <Container style={styles.container}>
             <View style={styles.listWrapper}>
                 <ScrollView>
                     <View style={styles.list}>
@@ -81,8 +59,7 @@ export const RegularListScreen = connect(mapStateToProps, {
                     </View> 
                 </ScrollView>
             </View>
-
-        </View>
+        </Container>
     );
 });
 
@@ -91,35 +68,7 @@ const styles= StyleSheet.create({
         backgroundColor: "white",
         flex: 1,
     },
-    header: {
-        flexDirection: "row",
-        backgroundColor: COLORS.main,
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 116,
-    },
-    title: {
-        fontSize: 18,
-        color: "white",
-        textAlign: 'center',
-        alignItems: 'center',
-       
-    },
-    menuBtn: {
-        position: 'absolute',
-        zIndex: 3,
-        right: 16,
-    },
-
-    listWrapper: {
-        borderTopStartRadius: 20,
-        borderTopEndRadius: 20,
-        backgroundColor: "white",
-        alignItems: "center",
-        marginTop: -24,
-        marginBottom: 100,
-    },
     list: {
-        margin: 16,
+        marginHorizontal: 16,
     }
 });

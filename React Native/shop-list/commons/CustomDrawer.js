@@ -1,10 +1,34 @@
 import React from 'react';
-import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 
-import { CustomText } from '../components/CustomText';
+import { CustonButton, CustomText } from '../components';
+import { GLOBEL_STYLES } from '../styles/globalStyles';
 import COLORS from '../styles/colors';
 
 export const CustomDrawer = ({ username, imgUrl, navigation }) => {
+
+    const navigationButtons = [
+        {
+            title: "Add new list",
+            toScreen: "CreateStack",
+            style: styles.createBtnSpacing,
+        },
+        {
+            title: "One time list",
+            toScreen: "One Time List",
+            params: { type: "One Time" }
+        },
+        {
+            title: "Regular list",
+            toScreen: "Regular List",
+            params: { type: "Regular" }
+        },
+        {
+            title: "User settings",
+            toScreen: "SettingsStack",
+        },
+    ];
+
 
     return(
         <View style={styles.container}>
@@ -17,43 +41,19 @@ export const CustomDrawer = ({ username, imgUrl, navigation }) => {
                 /> 
                 <CustomText style={styles.username}>{username}</CustomText>  
             </View>  
-
-            <View style={styles.drawerBtnsWrapper}>
-                <TouchableOpacity 
-                    style={[styles.drawerBtn, styles.drawerFirstBtn]} 
-                    onPress={() => navigation.navigate("Create List")} 
-                >
-                    <CustomText weight="bold" style={styles.drawerBtnLabel}>
-                        Add New List
-                    </CustomText>
-                </TouchableOpacity>
-
-                <TouchableOpacity 
-                    style={styles.drawerBtn} 
-                    onPress={() => navigation.navigate("One Time List", {})}
-                >
-                    <CustomText weight="bold" style={styles.drawerBtnLabel}>
-                        One Time List
-                    </CustomText>
-                </TouchableOpacity>
-
-                <TouchableOpacity 
-                    style={styles.drawerBtn} 
-                    onPress={() => navigation.navigate("Regular List")}
-                >
-                    <CustomText weight="bold" style={styles.drawerBtnLabel}>
-                        Regular List
-                    </CustomText>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.drawerBtn} >
-                    <CustomText 
-                        weight="bold" style={styles.drawerBtnLabel}
-                        onPress={() => navigation.navigate("UserSettings")}
-                    >
-                        User Settings
-                    </CustomText>
-                </TouchableOpacity>
+            
+            <View style={styles.navWrapper}>
+                {navigationButtons.map(({ title, style = {}, params, toScreen }) => (
+                    <CustonButton 
+                        key={title}
+                        style={{ ...styles.navBtn, ...style }}
+                        title={title}
+                        titleStyle={styles.navBtnTitle}
+                        onPress={() => {
+                            navigation.navigate(toScreen, params);
+                        }}
+                    />
+                ))}
             </View>
         </View>
     );
@@ -65,48 +65,44 @@ const styles = StyleSheet.create({
     },
     userInfo: {
         flexDirection: "row",
-        marginTop: 15,
         alignItems: 'center',
+        paddingHorizontal: GLOBEL_STYLES.PADDING,
+        paddingTop: 20,
+        paddingBottom: 10
     },
     userImg: {
         marginTop: 12,
-        marginLeft: 16,
         width: 50,
         height: 50,
         borderRadius: 50,
+        borderWidth: 3,
+        borderColor: COLORS.main
     },
     username: {
-        fontSize: 24,
-        color: COLORS.dark,
+        fontSize: 22,
+        opacity: 0.65,
         textAlign: 'center',
-        paddingTop: 5,
         paddingLeft: 22,
     },
-    drawerBtnsWrapper: {
+    navWrapper: {
         flex: 1,
         backgroundColor: COLORS.main,
-        borderTopStartRadius: 20,
-        borderTopEndRadius: 20,
-        marginTop: 16,
-        overflow: "hidden",
+        padding: GLOBEL_STYLES.PADDING,
+        borderTopEndRadius: 25,
+        borderTopStartRadius: 25,
+        alignItems: 'center',
     },
-    drawerBtn: {  
-        marginTop: 10,
-        paddingHorizontal: 20,      
+    navBtn: {
+        height: 34,
+        backgroundColor: 'white',
+        marginBottom: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
-    drawerFirstBtn: { 
-        marginBottom: 21, 
-        marginTop: 17, 
-    },
-    drawerBtnLabel: {
-        paddingVertical: 7,
-        backgroundColor: "white",
-        textAlign: "center",
+    navBtnTitle: {
         color: COLORS.main,
-        textTransform: "uppercase",
-        borderRadius: 38,
-        fontSize: 14,
-        alignItems: "center",
     },
-
+    createBtnSpacing : {
+        marginBottom: 32,
+    }
 });
