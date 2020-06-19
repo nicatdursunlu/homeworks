@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet, ScrollView, FlatList, Image } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, FlatList, Image } from 'react-native';
+import { connect } from 'react-redux';
+
 import { CustomText } from './CustomText';
 import { getShopList } from '../redux/data';
-import { connect } from 'react-redux';
 import COLORS from '../styles/colors';
 import images from '../styles/images';
 
@@ -13,40 +14,47 @@ const mapStateToProps = (state) => ({
 export const ProductsCard = connect(mapStateToProps)(({
     deleteProduct,
     editProduct,
-    products
+    products,
+    singleProductEditState
 }) => {
-    
-    //console.log("shopLists: ", shopLists);
-    //console.log("products: ", products);
 
+    const currentEditProductID = singleProductEditState.product?.id
+    console.log("currentEditProductID ", currentEditProductID);
     return(
         <View style={styles.container}>
             <FlatList 
                 data={products}
                 keyExtractor={(item) => item.id}
-                renderItem={({item}) => (
-                    <View key={item.id} style={styles.productsList}>
-                        <View style={styles.row}>
-                            <TouchableOpacity  
-                                style={styles.editBtn}
-                                onPress={() => editProduct(item)}
-                            >
-                                <Image style={styles.editImg} source={images.edit} />
-                            </TouchableOpacity>
-                            <CustomText style={styles.name}>{item.name}</CustomText>
+                renderItem={({ item }) => {
+                    const isCurrentEdit = currentEditProductID === item.id;
+                    console.log("isCurrentEdit ", isCurrentEdit);
+                    return(
+                        <View key={item.id} style={styles.productsList}>
+                            <View style={styles.row}>
+                                <TouchableOpacity onPress={() => editProduct(item)}>
+                                    <View 
+                                        style={[ 
+                                            styles.editBtn, 
+                                            { opacity: isCurrentEdit ? 0.5 : 1 }
+                                        ]}
+                                    >
+                                        <Image style={styles.editImg} source={images.edit} />
+                                    </View>
+                                </TouchableOpacity>
+                                <CustomText style={styles.name}>{item.name}</CustomText>
+                            </View>
+                            <View style={styles.row}>
+                                <CustomText style={styles.count}>x{item.count}{"  "}{item.unit}</CustomText>
+                                <TouchableOpacity 
+                                    style={styles.closeBtn}
+                                    onPress={() => deleteProduct(item.id)}
+                                >
+                                    <Image style={styles.closeImg} source={images.close} />
+                                </TouchableOpacity>  
+                            </View>
                         </View>
-                        <View style={styles.row}>
-                            <CustomText style={styles.count}>x{item.count}{"  "}{item.unit}</CustomText>
-                            <TouchableOpacity 
-                                style={styles.closeBtn}
-                                onPress={() => deleteProduct(item.id)}
-                                //onPress={() => console.log(item.id)}
-                            >
-                                <Image style={styles.closeImg} source={images.close} />
-                            </TouchableOpacity>  
-                        </View>
-                    </View>
-                )}
+                    )    
+                }}
             />
         </View>
         
@@ -60,13 +68,22 @@ const styles = StyleSheet.create({
     },
     productsList: {
         borderWidth: 2,
-        //marginTop: 10,
         marginBottom: 10,
         borderColor: COLORS.secondary,
         borderRadius: 35,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: "space-between",
+    },
+    btn: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        backgroundColor: "red",
+        padding: 10,
+        position: "absolute",
+        top: -2,
+        zIndex: 2,
     },
     editBtn: {
         backgroundColor: COLORS.secondary,
@@ -99,8 +116,6 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: 'row',
-        alignItems: 'center',
-        
+        alignItems: 'center',      
     }
-
 });

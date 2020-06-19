@@ -494,12 +494,12 @@ export function dataReducer(state = initialState, { type, payload }) {
                         return {
                             ...shopList,
                             products: shopList.products.map((product) => {
-                                if(product.id === payload.productID) {
+                                if(product.id === payload.product?.id) {
                                     return {
                                         ...product,
-                                        name: payload.name,
-                                        count: payload.count,
-                                        unit: payload.unit,
+                                        name: payload.product.name,
+                                        count: payload.product.count,
+                                        unit: payload.product.unit,
                                     };
                                 }
                                 return product;

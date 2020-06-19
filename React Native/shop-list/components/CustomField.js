@@ -1,34 +1,43 @@
 import React from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
 
+import { CustomText, families } from './CustomText';
 import COLORS from '../styles/colors';
 
 export const CustomField = ({ 
-    placeholder, onChangeText, value, placeholderTextColor, style
+    title, 
+    width, 
+    style, 
+    contentContainerStyle, 
+    ...rest 
 }) => {
     return(
-        <View style={styles.container}>
+        <View style={contentContainerStyle}>
+            <CustomText weight="medium" style={styles.title}>
+                {title}
+            </CustomText>
             <TextInput
-                placeholder={placeholder}
+                {...rest}
                 style={[styles.field, style]}
-                value={value}
-                onChangeText={onChangeText}
-                placeholderTextColor={placeholderTextColor}
             />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        width: "65%",
+    title: {
+        opacity: 0.5,
+        textAlign: "center",
+        fontSize: 12,
     },
     field: {
         backgroundColor: COLORS.grey,
-        borderRadius: 45,
-        paddingVertical: 8,
+        borderRadius: 25,
+        paddingHorizontal: 15,
         textAlign: "center", 
-        marginBottom: 15,
-        fontSize: 18,
+        marginTop: 7,
+        fontSize: 14,
+        fontFamily: families.bold, 
+        height: 42, 
     }
 });
