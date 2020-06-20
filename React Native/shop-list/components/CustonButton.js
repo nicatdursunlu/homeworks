@@ -29,18 +29,15 @@ export const CustonButton = ({ title, onPress, style, titleStyle = {} }) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: "92%",
+        width: "100%",
         overflow: "hidden",
         borderRadius: 45,
-    },
-    button: {
-        //backgroundColor: COLORS.main, 
     },
     title: {
         color: "white",
         fontSize: 14,
         textTransform: "uppercase",
-        paddingVertical: 14,
+        paddingVertical: 12,
         textAlign: "center",
     },
 });

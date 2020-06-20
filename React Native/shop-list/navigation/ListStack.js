@@ -4,8 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { 
     AddProductToListScreen, 
     RegularListScreen, 
-    OneTimeListScreen, 
-    CreateListScreen, 
+    OneTimeListScreen,  
     SingleListScreen 
 } from '../screens';
 import { headerDefaultStyles } from '../styles/headerDefaultStyles';
@@ -45,8 +44,42 @@ export const ListStack = () => {
                     )
                 })}
             />
-            <Screen name="SingleListScreen" component={SingleListScreen} />
-            <Screen name="AddProductToListScreen" component={AddProductToListScreen}/>      
+            <Screen 
+                name="SingleListScreen" 
+                component={SingleListScreen} 
+                options={{
+                    headerTransparent: true,
+                    headerTitle: false,
+                    headerLeft: () => <HeaderIcon />
+                }} 
+            />
+            <Screen 
+                name="AddProductToListScreen" 
+                component={AddProductToListScreen}
+                options={({ navigation, route }) => ({
+                    title: route.params.singleList.title,
+                    headerRight: () => (
+                        <HeaderIcon 
+                            side="right" 
+                            iconName="save"
+                            onPress={() => navigation.goBack()}
+                        />
+                    ),
+                    headerLeft: () => (
+                        <HeaderIcon
+                            side="left" 
+                            iconName="arrowBack"
+                            onPress={() => {
+                                navigation.navigate(
+                                    route.params.singleList.type === "Regular" 
+                                        ? "Regular List"
+                                        : "One Time List"
+                                )
+                            }}
+                        />
+                    )
+                })}
+            />      
         </Navigator>
     );
 };

@@ -29,6 +29,7 @@ import {
 import images from '../styles/images';
 import COLORS from '../styles/colors';
 import { getWidthByPercents } from '../utils/getWidthByPercents';
+import { Container } from '../commons';
 
 const mapStateToProps = (state) => ({
     shopLists: getShopList(state),
@@ -52,11 +53,11 @@ export const AddProductToListScreen = connect(mapStateToProps, {
         route, 
         addProduct, 
         deleteProduct, 
-        updateProduct 
+        updateProduct, 
     } = props;
 
     const { singleList } = route.params;
-    const { products } = shopLists.find((item) => item.id === singleList.id);
+    const { products } = shopLists.find((item) => item.id === singleList?.id);
 
     const UNIT = ["pkg", "kg", "litre", "bott"];
     const fieldsInitialState = {
@@ -148,31 +149,7 @@ export const AddProductToListScreen = connect(mapStateToProps, {
 
     return(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.container}>
-                <View style={styles.header}>
-                    <TouchableOpacity
-                        style={styles.arrowBackBtn}
-                        onPress={() => 
-                            navigation.navigate(
-                                singleList.type === "Regular" 
-                                    ? "Regular List" 
-                                    : "One Time List"
-                                )
-                            }
-                    >
-                        <Image style={styles.arrowBackIcon} source={images.arrowBack} />
-                    </TouchableOpacity>
-                    <CustomText weight="medium" style={styles.title}>
-                        {singleList.title}
-                    </CustomText>
-                    <TouchableOpacity
-                        style={styles.saveBtn}
-                        onPress={() => navigation.goBack()}
-                    >
-                        <Image style={styles.saveIcon} source={images.save} />
-                    </TouchableOpacity>
-                </View>
-
+            <Container style={styles.container}>
                 <View style={styles.form}>
                     <View style={styles.horizontal}>
                         <View style={[styles.row, styles.marginTop]}>
@@ -189,8 +166,7 @@ export const AddProductToListScreen = connect(mapStateToProps, {
                                 contentContainerStyle={{ width: getWidthByPercents(25, 3) }}
                                 onChangeText={(value) => fieldChangeHandler("count", value)}
                             />
-                        </View>
-                            
+                        </View>    
                         <RadioGroup 
                             value={fields.unit} 
                             onValueChange={(value) => fieldChangeHandler("unit", value)} 
@@ -218,16 +194,16 @@ export const AddProductToListScreen = connect(mapStateToProps, {
                             </View> 
                         )}
                     </View> 
-                    <View style={styles.border}/>
+                    
                 </View>
-                
+                <View style={styles.border}/>
                 <ProductsCard 
                     products={products} 
                     deleteProduct={deleteBtnHandler}
                     editProduct={initSingleProductEdit}
                     singleProductEditState={singleProductEditState}
                 />
-            </View>
+            </Container>
         </TouchableWithoutFeedback>
     );
 });
@@ -237,45 +213,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
     },
-    header: {
-        flexDirection: "row",
-        height: 116,
-        backgroundColor: COLORS.main,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    title: {
-        fontSize: 18,
-        color: "white",
-        textAlign: 'center',
-    },
-    arrowBackBtn: {
-        position: 'absolute',
-        zIndex: 3,
-        left: 1,
-    },
-    arrowBackIcon: {
-        height: 18,
-        width: 23,
-        marginLeft: 20,
-    },
-    saveBtn: {
-        position: 'absolute',
-        right: 1,
-    },
-    saveIcon: {
-        marginRight: 20,
-    },
     types: {
         marginVertical: 14,
-    },
-    form: {
-        flex: 1,
-        backgroundColor: 'white',
-        borderTopStartRadius: 20, 
-        borderTopEndRadius: 20,
-        marginTop: -24,
-        marginBottom: -190,
     },
     horizontal: {
         marginHorizontal: 16,
@@ -305,7 +244,8 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.main,
     },
     border: {
-        paddingBottom: 21,
+        marginTop: 21,
+        marginBottom: 33,
         borderBottomColor: "#E5E5E5",
         borderBottomWidth: 2,
     }
