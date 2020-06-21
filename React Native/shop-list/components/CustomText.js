@@ -1,7 +1,7 @@
 import React from "react";
 import { Text } from "react-native";
 
-const families = {
+export const families = {
     regular: "MontserratRegular",
     medium: "MontserratMedium",
     bold: "MontserratBold",

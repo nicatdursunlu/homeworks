@@ -8,10 +8,11 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import { CustomText, SingleListCard } from '../components';
+import { CustomText, SingleListCard, ListHeader } from '../components';
 import { getShopList, changeBuyStatus, resetProduct } from '../redux/data';
 import COLORS from '../styles/colors';
 import images from '../styles/images';
+import { GLOBEL_STYLES } from '../styles/globalStyles';
 
 const mapStateToProps = (state) => ({
     shopLists: getShopList(state),
@@ -23,13 +24,9 @@ export const SingleListScreen = connect(mapStateToProps, {
 })((props) => {
     const { route, navigation, changeBuyStatus, resetProduct } = props;
     
-    const products = route.params.products;
     const title = route.params.title;
-    const productsCount = products.length;
     const id = route.params.shopListID;
     const singleList = props.shopLists.find((item) => item.id === id);
-    const boughtProductCount = singleList.products.filter(
-        (product) => product.bought === true).length;
 
     const toggleForBuy = (shopListID, productID) => {
         changeBuyStatus({ shopListID, productID });
@@ -60,25 +57,11 @@ export const SingleListScreen = connect(mapStateToProps, {
                     <Image style={styles.editIcon} source={images.edit} />
                 </TouchableOpacity>
             </View>
-
             <View style={styles.body}>
-                <View style={styles.resetRow}>
-                    {(singleList.type === "regular" && productsCount) ? (
-                        <TouchableOpacity style={styles.resetBtn} onPress={resetBtnHandler}>
-                            <CustomText weight="bold" style={styles.resetBtnTitle}>
-                                Reset
-                            </CustomText>
-                        </TouchableOpacity>
-                        ) : (
-                        <CustomText></CustomText>
-                    )}
-                    {productsCount != 0 && (
-                        <CustomText style={styles.productsCount}>
-                            {boughtProductCount} / {productsCount}
-                        </CustomText>
-                    )}
-                    
-                </View>
+                <ListHeader 
+                    resetBtnHandler={resetBtnHandler} 
+                    singleList={singleList}
+                />
                 <FlatList
                     data={singleList.products}
                     keyExtractor={(item) => item.id}
@@ -94,8 +77,7 @@ export const SingleListScreen = connect(mapStateToProps, {
                     )}
                 />
             </View>
-        </View>
-       
+        </View>  
     );
 });
 
@@ -124,31 +106,28 @@ const styles = StyleSheet.create({
     arrowBackIcon: {
         height: 18,
         width: 23,
-        marginLeft: 20,
+        marginLeft: GLOBEL_STYLES.PADDING,
     },
     editBtn: {
         position: 'absolute',
         right: 1,
     },
     editIcon: {
-        marginRight: 20,
+        marginRight: GLOBEL_STYLES.PADDING,
     },
-
-
     body: {
         flex: 1,
         paddingTop: 10,
         borderTopStartRadius: 20,
         borderTopEndRadius: 20,
         backgroundColor: "white",
-        marginTop: -24,
-        paddingHorizontal: 16,
+        marginTop: -34,
+        paddingHorizontal: GLOBEL_STYLES.PADDING,
     },
     resetRow: {
         flexDirection: 'row',
         justifyContent: "space-between",
         alignItems: 'center',
-        marginBottom: 10,
     },
     resetBtn: {
         backgroundColor: COLORS.main,
@@ -188,5 +167,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingRight: 17,
     }
-
 });

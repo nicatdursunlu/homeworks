@@ -14,6 +14,7 @@ import images from '../styles/images';
 import COLORS from '../styles/colors';
 
 import { connect } from 'react-redux';
+import { Container } from '../commons';
 
 
 const mapStateToProps = (state) => ({
@@ -44,20 +45,7 @@ export const OneTimeListScreen = connect(mapStateToProps, {
 
 
     return(
-        <View style={styles.container}>
-
-            <View style={styles.header}>
-                <CustomText weight="medium" style={styles.title}>
-                    One Time Lists
-                </CustomText>
-                <TouchableOpacity
-                    style={styles.menuBtn}
-                    onPress={navigation.toggleDrawer}
-                >
-                    <Image style={styles.menuIcon} source={images.menu} />
-                </TouchableOpacity>
-            </View>
-
+        <Container style={styles.container}>
             <View style={styles.listWrapper}>
                 <ScrollView>
                     <View style={styles.list}>
@@ -83,7 +71,7 @@ export const OneTimeListScreen = connect(mapStateToProps, {
                 </ScrollView>
             </View>
 
-        </View>
+        </Container>
     );
 });
 
@@ -92,34 +80,7 @@ const styles= StyleSheet.create({
         backgroundColor: "white",
         flex: 1,
     },
-    header: {
-        flexDirection: "row",
-        backgroundColor: COLORS.main,
-        height: 116,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    title: {
-        fontSize: 18,
-        color: "white",
-        textAlign: 'center',
-        alignItems: 'center',
-    },
-    menuBtn: {
-        position: 'absolute',
-        zIndex: 3,
-        right: 16,
-    },
-
-    listWrapper: {
-        borderTopStartRadius: 20,
-        borderTopEndRadius: 20,
-        backgroundColor: "white",
-        alignItems: "center",
-        marginTop: -24,
-        marginBottom: 100,
-    },
     list: {
-        margin: 16,
+        marginHorizontal: 16,
     }
 });
